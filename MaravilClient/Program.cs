@@ -1,6 +1,8 @@
 using DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Services.ClientActions;
 using Services.UserActions;
 using System.Configuration;
@@ -16,32 +18,29 @@ namespace MaravilClient
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
-
-            ApplicationConfiguration.Initialize();
-            var services = new ServiceCollection();
-            ConfigureServices(services);
-
-            using (var serviceProvider = services.BuildServiceProvider())
-            {
-                var dataContext = serviceProvider.GetRequiredService<MaravilContext>();
-                dataContext.Database.Migrate();
-                var frmInicio = serviceProvider.GetRequiredService<Inicio>();
-                Application.Run(frmInicio);
-            }
-
+            var host = CreateHostBuilder().Build();
+            ServiceProvider = host.Services;
+            var dataContext = ServiceProvider.GetRequiredService<MaravilContext>();
+            dataContext.Database.Migrate();
+            Application.Run(ServiceProvider.GetRequiredService<Inicio>());
         }
-
-        private static void ConfigureServices(ServiceCollection services)
+        public static IServiceProvider ServiceProvider { get; private set; }
+        static IHostBuilder CreateHostBuilder()
         {
-            services.AddDbContext<MaravilContext>(options =>
-                                                  options.UseSqlServer(ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString)); 
-            
-            services.AddScoped<IClientActions, ClientActions>()
-                    .AddScoped<IUserActions, UserActions>()
-                    .AddScoped<Inicio>();
-        }
+           
+            return Host.CreateDefaultBuilder()
+                .ConfigureAppConfiguration(x=>x.AddJsonFile("appConfig.json"))
+                .ConfigureServices((context, services) => {
+                    services.AddDbContext<MaravilContext>(options =>
+                                                   options.UseSqlServer(context.Configuration.GetConnectionString("SQLConnection")));
+                    services.AddTransient<IUserActions, UserActions>();
+                    services.AddTransient<IClientActions, ClientActions>();
+                    services.AddTransient<Inicio>();
+                });
+        }       
     }
 }

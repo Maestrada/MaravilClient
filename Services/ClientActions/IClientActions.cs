@@ -8,5 +8,6 @@ namespace Services.ClientActions
 {
     public interface IClientActions
     {
+        public string SendGreetings();
     }
 }

@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "devDependencies": {
+  },
+
+  "ConnectionStrings": {
+    "SQLConnection": "Data Source=DESKTOP-11DI9SV;Initial Catalog=MaravilDb;Integrated Security=True"
+  }
+}
