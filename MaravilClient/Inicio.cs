@@ -12,7 +12,6 @@ namespace MaravilClient
         {
             InitializeComponent();
             this.userActionsGlobal = userActions;   
-            MessageBox.Show(userActions.MessageText()+" - "+ ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString);
         }
 
         private void Form1_Load(object sender, EventArgs e)
