@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,10 @@ namespace Services.ClientActions
 {
     public interface IClientActions
     {
-        public string SendGreetings();
+        public bool CreateClient(Client Client);
+        public bool UpdateClient(Client Client);
+        public bool DeleteClient(Client Client);
+        public Client? GetClient(int id);
+        public IEnumerable<Client> ListClient(string clientName,string lastName);
     }
 }

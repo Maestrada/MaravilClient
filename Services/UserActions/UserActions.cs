@@ -19,9 +19,7 @@ namespace Services.UserActions
         }
 
         public bool CreateUser(User user)
-        {
-            bool result = false;
-
+        {      
             IEnumerable<User> listUser = (IEnumerable<User>)userContext.Users.Select(x => x.UserName == user.UserName.Trim());
 
             //UserNAme is being Used
@@ -46,6 +44,10 @@ namespace Services.UserActions
                 userContext.Remove(userToDelete);
                 userContext.SaveChanges();
                 result = true;
+            }
+            else
+            {
+                throw new Exception("Usuario no encontrado");
             }
             return result;
         }
@@ -72,13 +74,17 @@ namespace Services.UserActions
                 throw new Exception("Usuario ya en uso");
             }
 
-            User userToUpdate = GetUser(user.Id);
+            User? userToUpdate = GetUser(user.Id);
             if (userToUpdate != null)
             {
                 userToUpdate.ModifiedOn = DateTime.Now;
                 userToUpdate.UserName = user.UserName;
                 userToUpdate.Password = Encrypt.GetSHA256(user.Password);
                 result = true;
+            }
+            else
+            {
+                throw new Exception("Usuario no encontrado");
             }
             return result;
         }
