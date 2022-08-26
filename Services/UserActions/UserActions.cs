@@ -59,7 +59,7 @@ namespace Services.UserActions
 
         public IEnumerable<User> ListUser(string userName)
         {
-            return (userName == null && userName != String.Empty) ? (IEnumerable<User>)userContext.Users.Select(x => x.UserName.Contains(userName.Trim())) : (IEnumerable<User>)userContext.Users.ToList();
+            return (!string.IsNullOrEmpty(userName)) ? (IEnumerable<User>)userContext.Users.Select(x => x.UserName.Contains(userName.Trim())) : (IEnumerable<User>)userContext.Users.ToList();
         }
 
         public bool UpdateUser(User user)

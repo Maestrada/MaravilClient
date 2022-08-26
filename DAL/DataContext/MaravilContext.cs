@@ -19,7 +19,7 @@ namespace DAL.DataContext
             modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<Client>().ToTable("Client").HasOne(c=>c.CreatedByUser).WithOne().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Client>().HasOne(c=>c.ModifiedByUser).WithOne().OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<User>().HasData(new {Id=1, UserName="admin",Password= "24a2a21b503d73db37ec36e1d81168f0" ,CreatedOn=DateTime.Now, ModifiedOn = DateTime.Now });
+            modelBuilder.Entity<User>().HasData(new {Id=1, UserName="admin",Password= "bca6062db9ffe0bdb13f01b5dc48f6e0e7d0f8c8a21af0324c9971d3fbd51e08", CreatedOn=DateTime.Now, ModifiedOn = DateTime.Now });
         }
 
         public DbSet<User> Users { get; set; }
