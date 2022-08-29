@@ -57,6 +57,15 @@ namespace Services.UserActions
             return userContext.Users.Find(id);
         }
 
+        public User? Initsession(string userName, string password)
+        {
+            User? loggedUser;
+            string encryptedPass = Encrypt.GetSHA256(password);
+            loggedUser = userContext.Users.FirstOrDefault(x => x.UserName == userName && x.Password == encryptedPass);
+
+            return loggedUser;
+        }
+
         public IEnumerable<User> ListUser(string userName)
         {
             return (!string.IsNullOrEmpty(userName)) ? (IEnumerable<User>)userContext.Users.Select(x => x.UserName.Contains(userName.Trim())) : (IEnumerable<User>)userContext.Users.ToList();
