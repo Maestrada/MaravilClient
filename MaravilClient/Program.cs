@@ -24,9 +24,12 @@ namespace MaravilClient
 
             var host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
-            var dataContext = ServiceProvider.GetRequiredService<MaravilContext>();
-            dataContext.Database.Migrate();
-            Application.Run(ServiceProvider.GetRequiredService<Inicio>());
+            using (var scope =ServiceProvider.CreateScope())
+            {
+                var dataContext = ServiceProvider.GetRequiredService<MaravilContext>();
+                dataContext.Database.Migrate();
+                Application.Run(ServiceProvider.GetRequiredService<Inicio>());
+            }
         }
         public static IServiceProvider ServiceProvider { get; private set; }
         static IHostBuilder CreateHostBuilder()

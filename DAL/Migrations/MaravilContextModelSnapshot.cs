@@ -104,7 +104,7 @@ namespace DAL.Migrations
                             Id = 1,
                             CreatedOn = new DateTime(2022, 8, 23, 20, 42, 10, 562, DateTimeKind.Local).AddTicks(6566),
                             ModifiedOn = new DateTime(2022, 8, 23, 20, 42, 10, 562, DateTimeKind.Local).AddTicks(6575),
-                            Password = "24a2a21b503d73db37ec36e1d81168f0",
+                            Password = "bca6062db9ffe0bdb13f01b5dc48f6e0e7d0f8c8a21af0324c9971d3fbd51e08",
                             UserName = "admin"
                         });
                 });
