@@ -30,7 +30,7 @@ namespace MaravilClient
 
         private void btnSave_Click(object sender, EventArgs e)
         {            
-            if (MessageBox.Show("Esta seguro de continuar?", "Maravil - Nuevo cliente", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Esta seguro de continuar?", "Maravil - Nuevo cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
 
                 string message = string.Empty;
@@ -63,7 +63,7 @@ namespace MaravilClient
                     client.ModifiedByUserId = loggedUser.Id; 
 
                     if (clientActionsGlobal.CreateClient(client))
-                        MessageBox.Show("CLiente agregado exitosamente. ", "Maravil - Nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); ;
+                        MessageBox.Show("Cliente agregado exitosamente. ", "Maravil - Nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); ;
                 }
                 catch (Exception ex)
                 {

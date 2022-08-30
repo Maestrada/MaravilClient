@@ -313,11 +313,11 @@
             // 
             // btnShowPrintQeue
             // 
-            this.btnShowPrintQeue.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnShowPrintQeue.BackColor = System.Drawing.Color.CornflowerBlue;
             this.btnShowPrintQeue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnShowPrintQeue.Location = new System.Drawing.Point(203, 29);
+            this.btnShowPrintQeue.Location = new System.Drawing.Point(280, 29);
             this.btnShowPrintQeue.Name = "btnShowPrintQeue";
-            this.btnShowPrintQeue.Size = new System.Drawing.Size(90, 78);
+            this.btnShowPrintQeue.Size = new System.Drawing.Size(175, 78);
             this.btnShowPrintQeue.TabIndex = 2;
             this.btnShowPrintQeue.Text = "Ver cola de impresion";
             this.btnShowPrintQeue.UseVisualStyleBackColor = false;
@@ -329,9 +329,9 @@
             this.btnAddPrintQeue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnAddPrintQeue.Location = new System.Drawing.Point(91, 29);
             this.btnAddPrintQeue.Name = "btnAddPrintQeue";
-            this.btnAddPrintQeue.Size = new System.Drawing.Size(94, 78);
+            this.btnAddPrintQeue.Size = new System.Drawing.Size(165, 78);
             this.btnAddPrintQeue.TabIndex = 1;
-            this.btnAddPrintQeue.Text = "Agregar a cola de impresion";
+            this.btnAddPrintQeue.Text = "Agregar marcados a cola de impresion";
             this.btnAddPrintQeue.UseVisualStyleBackColor = false;
             this.btnAddPrintQeue.Click += new System.EventHandler(this.btnAddPrintQeue_Click);
             // 

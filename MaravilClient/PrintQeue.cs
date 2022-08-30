@@ -1,5 +1,6 @@
 ﻿using BAL.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -46,6 +47,23 @@ namespace MaravilClient
                         Address = item.Cells[4].Value as string,
                     });
             }
+        }
+
+        private void PrintQeue_Load(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = null;
+            dataGridView1.Rows.Clear();
+            foreach (Client client in listClient)
+            {
+                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone, client.Address);
+            }
+        }
+
+        private void btnDeleteFromQeue_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null)
+                return;
+            dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
         }
     }
 }

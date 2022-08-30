@@ -44,11 +44,30 @@ namespace MaravilClient
         {
             AddClient addClient = new AddClient(loggedUser, clientActionsGlobal);
             addClient.ShowDialog();
+            LoadDataGrid();
         }
 
         private void borrarClienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //revisar actualizacion de estado del datagrid al descheckear
+            List<Client> clients = GetCheckedClients();
+            if (clients.Count > 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Esta seguro de eliminar los clientes seleccionados?", "Maravil - Eliminar cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    foreach (Client client in clients)
+                    {
+                        clientActionsGlobal.DeleteClient(client);
+                    }
+                    clientsToPrint.Clear();
+                    LoadDataGrid();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione los clientes a eliminar.", "Maravil - Eliminar cliente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void verUsuariosDelSistemaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -86,6 +105,7 @@ namespace MaravilClient
         {
             List<Client> lista = clientActionsGlobal.ListClient(txtName.Text, txtLastName.Text, txtPhone.Text).ToList();
             dataGridView1.DataSource = null;
+            dataGridView1.Rows.Clear();
             foreach (Client client in lista)
             {
                 bool selectedData = clientsToPrint.Any(x=>x.Id==client.Id) || checkAll;
@@ -107,16 +127,16 @@ namespace MaravilClient
 
         private void btnAddPrintQeue_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in dataGridView1.Rows)
+            foreach(var item in GetCheckedClients())
             {
-                if ((bool)item.Cells[5].Value)
+                if (!clientsToPrint.Any(x => x.Id == item.Id))
                     clientsToPrint.Add(new Client
                     {
-                        Id = (int)item.Cells[0].Value,
-                        Name = item.Cells[1].Value as string,
-                        LastName = item.Cells[2].Value as string,
-                        CellPhone = item.Cells[3].Value as string,
-                        Address = item.Cells[4].Value as string,
+                        Id = item.Id,
+                        Name = item.Name,
+                        LastName = item.LastName,
+                        CellPhone = item.CellPhone,
+                        Address = item.Address,
                     });
             }
         }
@@ -125,7 +145,7 @@ namespace MaravilClient
         {
             PrintQeue printQeue = new PrintQeue(clientsToPrint);
             DialogResult result = printQeue.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result == DialogResult.Cancel)
             {
                 clientsToPrint = printQeue.listClient;
                 LoadDataGrid();
@@ -135,6 +155,28 @@ namespace MaravilClient
         private void btnCheckAll_Click(object sender, EventArgs e)
         {
             LoadDataGrid(true);
+        }
+
+        private List<Client> GetCheckedClients()
+        {
+            List<Client> checkeds = new List<Client>();
+
+            foreach (DataGridViewRow item in dataGridView1.Rows)
+            {
+                if ((bool)item.Cells[5].Value)
+                {
+                    checkeds.Add(new Client
+                    {
+                        Id = (int)item.Cells[0].Value,
+                        Name = item.Cells[1].Value as string,
+                        LastName = item.Cells[2].Value as string,
+                        CellPhone = item.Cells[3].Value as string,
+                        Address = item.Cells[4].Value as string,
+                    });
+                }
+            }
+
+            return checkeds;
         }
     }
 }
