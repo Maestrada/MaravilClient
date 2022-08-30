@@ -21,8 +21,6 @@ namespace Services.ClientActions
         {
             client.CreatedOn = DateTime.Now;
             client.ModifiedOn  = DateTime.Now;
-            client.CreatedByUserId = 1;
-            client.ModifiedByUserId = 1;
             clientContext.Add(client);
             clientContext.SaveChanges();
             return true;
@@ -50,17 +48,20 @@ namespace Services.ClientActions
             return clientContext.Clients.Find(id);
         }
 
-        public IEnumerable<Client> ListClient(string clientName,string lastName)
+        public IEnumerable<Client> ListClient(string clientName,string lastName,string phone)
         {
             IEnumerable<Client> returnData =  new List<Client>() ;
 
-            if (!string.IsNullOrEmpty(clientName) || !string.IsNullOrEmpty(lastName)) {
-                if (!string.IsNullOrEmpty(clientName) && !string.IsNullOrEmpty(lastName))
-                    returnData = (IEnumerable<Client>)clientContext.Clients.Select(x => x.Name.Contains(clientName.Trim()) || x.LastName.Contains(lastName.Trim()));
-                if (!string.IsNullOrEmpty(clientName) && string.IsNullOrEmpty(lastName))
+            if (!string.IsNullOrEmpty(clientName) || !string.IsNullOrEmpty(lastName) || !string.IsNullOrEmpty(phone))
+            {
+                if (!string.IsNullOrEmpty(clientName) && !string.IsNullOrEmpty(lastName) && !string.IsNullOrEmpty(phone))
+                    returnData = (IEnumerable<Client>)clientContext.Clients.Select(x => x.Name.Contains(clientName.Trim()) || x.LastName.Contains(lastName.Trim())||x.CellPhone.Contains(phone.Trim())||x.CellPhone2.Contains(phone.Trim()));
+                if (!string.IsNullOrEmpty(clientName) && string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(phone))
                     returnData = (IEnumerable<Client>)clientContext.Clients.Select(x => x.Name.Contains(clientName.Trim()));
-                if (string.IsNullOrEmpty(clientName) && !string.IsNullOrEmpty(lastName))
+                if (string.IsNullOrEmpty(clientName) && !string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(phone))
                     returnData = (IEnumerable<Client>)clientContext.Clients.Select(x => x.LastName.Contains(lastName.Trim()));
+                if (string.IsNullOrEmpty(clientName) && string.IsNullOrEmpty(lastName) && !string.IsNullOrEmpty(phone))
+                    returnData = (IEnumerable<Client>)clientContext.Clients.Select(x => x.CellPhone.Contains(phone.Trim()) || x.CellPhone2.Contains(phone.Trim()));
             }
             else
             {
@@ -77,8 +78,7 @@ namespace Services.ClientActions
             Client? userToUpdate = GetClient(client.Id);
             if (userToUpdate != null)
             {
-                userToUpdate.ModifiedOn = DateTime.Now;
-                userToUpdate.ModifiedByUserId = 2;
+                userToUpdate.ModifiedOn = DateTime.Now;                
                 result = true;
             }
             else

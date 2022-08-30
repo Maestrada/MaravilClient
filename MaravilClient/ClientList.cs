@@ -1,5 +1,7 @@
 ﻿using BAL.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Services.ClientActions;
+using Services.UserActions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +16,18 @@ namespace MaravilClient
 {
     public partial class ClientList : Form
     {
-        User loggedUser;
-        public ClientList(User user)
+        private User loggedUser;
+        private readonly IUserActions userActionsGlobal;
+        private readonly IClientActions clientActionsGlobal;
+        private List<Client> clientsToPrint;
+
+        public ClientList(User user, IUserActions userActions, IClientActions clientActions)
         {
             InitializeComponent();
             loggedUser = user;
+            userActionsGlobal = userActions;
+            clientActionsGlobal = clientActions;
+            clientsToPrint = new List<Client>();
         }
 
         private void agregarNuevoUsuarioDeSistemaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -33,7 +42,8 @@ namespace MaravilClient
 
         private void agregarClienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            AddClient addClient = new AddClient(loggedUser, clientActionsGlobal);
+            addClient.ShowDialog();
         }
 
         private void borrarClienteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,7 +68,7 @@ namespace MaravilClient
 
         private void ClientList_Load(object sender, EventArgs e)
         {
-           
+            LoadDataGrid();
         }
 
         private void cerrarSesionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -72,9 +82,15 @@ namespace MaravilClient
         }
 
 
-        private void LoadDataGrid()
+        private void LoadDataGrid(bool checkAll = false)
         {
-
+            List<Client> lista = clientActionsGlobal.ListClient(txtName.Text, txtLastName.Text, txtPhone.Text).ToList();
+            dataGridView1.DataSource = null;
+            foreach (Client client in lista)
+            {
+                bool selectedData = clientsToPrint.Any(x=>x.Id==client.Id) || checkAll;
+                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2.Trim()) ? "" : " / " + client.CellPhone2), client.Address, selectedData);
+            }
         }
         private void CleanTextBoxes()
         {
@@ -87,6 +103,38 @@ namespace MaravilClient
         {
             LoadDataGrid();
             CleanTextBoxes();
+        }
+
+        private void btnAddPrintQeue_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in dataGridView1.Rows)
+            {
+                if ((bool)item.Cells[5].Value)
+                    clientsToPrint.Add(new Client
+                    {
+                        Id = (int)item.Cells[0].Value,
+                        Name = item.Cells[1].Value as string,
+                        LastName = item.Cells[2].Value as string,
+                        CellPhone = item.Cells[3].Value as string,
+                        Address = item.Cells[4].Value as string,
+                    });
+            }
+        }
+
+        private void btnShowPrintQeue_Click(object sender, EventArgs e)
+        {
+            PrintQeue printQeue = new PrintQeue(clientsToPrint);
+            DialogResult result = printQeue.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                clientsToPrint = printQeue.listClient;
+                LoadDataGrid();
+            }
+        }
+
+        private void btnCheckAll_Click(object sender, EventArgs e)
+        {
+            LoadDataGrid(true);
         }
     }
 }
