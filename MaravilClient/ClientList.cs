@@ -122,7 +122,6 @@ namespace MaravilClient
         private void btBuscarCliente_Click(object sender, EventArgs e)
         {
             LoadDataGrid();
-            CleanTextBoxes();
         }
 
         private void btnAddPrintQeue_Click(object sender, EventArgs e)
@@ -177,6 +176,32 @@ namespace MaravilClient
             }
 
             return checkeds;
+        }
+
+        private void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.IsCurrentCellDirty)
+            {
+                dataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
+
+        private void txtName_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                LoadDataGrid();
+        }
+
+        private void txtLastName_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                LoadDataGrid();
+        }
+
+        private void txtPhone_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode==Keys.Enter)
+                LoadDataGrid();
         }
     }
 }

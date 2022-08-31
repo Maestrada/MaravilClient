@@ -20,7 +20,7 @@ namespace Services.UserActions
 
         public bool CreateUser(User user)
         {      
-            IEnumerable<User> listUser = (IEnumerable<User>)userContext.Users.Select(x => x.UserName == user.UserName.Trim());
+            List<User> listUser = (List<User>)userContext.Users.Select(x => x.UserName == user.UserName.Trim());
 
             //UserNAme is being Used
             if (listUser != null && listUser.Any(x => x.UserName == user.UserName.Trim()))
@@ -66,16 +66,16 @@ namespace Services.UserActions
             return loggedUser;
         }
 
-        public IEnumerable<User> ListUser(string userName)
+        public List<User> ListUser(string userName)
         {
-            return (!string.IsNullOrEmpty(userName)) ? (IEnumerable<User>)userContext.Users.Select(x => x.UserName.Contains(userName.Trim())) : (IEnumerable<User>)userContext.Users.ToList();
+            return (!string.IsNullOrEmpty(userName)) ? (List<User>)userContext.Users.Select(x => x.UserName.Contains(userName.Trim())) : (List<User>)userContext.Users.ToList();
         }
 
         public bool UpdateUser(User user)
         {
             bool result = false;
 
-            IEnumerable<User> listUser = (IEnumerable<User>)userContext.Users.Select(x => x.UserName == user.UserName.Trim());
+            List<User> listUser = (List<User>)userContext.Users.Select(x => x.UserName == user.UserName.Trim());
 
             //UserNAme is being Used
             if (listUser != null && listUser.Any(x => x.Id != user.Id))

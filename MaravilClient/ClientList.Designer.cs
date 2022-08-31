@@ -266,6 +266,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(225, 29);
             this.txtPhone.TabIndex = 3;
+            this.txtPhone.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPhone_KeyUp);
             // 
             // txtLastName
             // 
@@ -274,6 +275,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(214, 29);
             this.txtLastName.TabIndex = 2;
+            this.txtLastName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtLastName_KeyUp);
             // 
             // txtName
             // 
@@ -282,6 +284,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(223, 29);
             this.txtName.TabIndex = 1;
+            this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyUp);
             // 
             // groupBox2
             // 
@@ -354,6 +357,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1203, 470);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView1_CurrentCellDirtyStateChanged);
             // 
             // Id
             // 

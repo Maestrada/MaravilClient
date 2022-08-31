@@ -13,7 +13,7 @@ namespace Services.UserActions
         public bool UpdateUser(User user);
         public bool DeleteUser(User user);
         public User? GetUser(int id);
-        public IEnumerable<User> ListUser(string userName);
+        public List<User> ListUser(string userName);
         public User? Initsession(string userName,string password);
        
     }

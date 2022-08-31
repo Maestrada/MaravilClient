@@ -4,6 +4,7 @@ using DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(MaravilContext))]
-    partial class MaravilContextModelSnapshot : ModelSnapshot
+    [Migration("20220831223251_ModificationRelationships")]
+    partial class ModificationRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,11 +63,18 @@ namespace DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedByUserId");
+                    b.HasIndex("CreatedByUserId")
+                        .IsUnique();
 
-                    b.HasIndex("ModifiedByUserId");
+                    b.HasIndex("ModifiedByUserId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Client", (string)null);
                 });
@@ -100,8 +109,8 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2022, 8, 31, 16, 37, 2, 486, DateTimeKind.Local).AddTicks(1804),
-                            ModifiedOn = new DateTime(2022, 8, 31, 16, 37, 2, 486, DateTimeKind.Local).AddTicks(1815),
+                            CreatedOn = new DateTime(2022, 8, 31, 16, 32, 51, 365, DateTimeKind.Local).AddTicks(3369),
+                            ModifiedOn = new DateTime(2022, 8, 31, 16, 32, 51, 365, DateTimeKind.Local).AddTicks(3379),
                             Password = "bca6062db9ffe0bdb13f01b5dc48f6e0e7d0f8c8a21af0324c9971d3fbd51e08",
                             UserName = "admin"
                         });
@@ -110,16 +119,20 @@ namespace DAL.Migrations
             modelBuilder.Entity("BAL.Models.Client", b =>
                 {
                     b.HasOne("BAL.Models.User", "CreatedByUser")
-                        .WithMany("ClientsCreators")
-                        .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne()
+                        .HasForeignKey("BAL.Models.Client", "CreatedByUserId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("BAL.Models.User", "ModifiedByUser")
-                        .WithMany("ClientsModificators")
-                        .HasForeignKey("ModifiedByUserId")
+                        .WithOne()
+                        .HasForeignKey("BAL.Models.Client", "ModifiedByUserId")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
+
+                    b.HasOne("BAL.Models.User", null)
+                        .WithMany("Clients")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("CreatedByUser");
 
@@ -128,9 +141,7 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("BAL.Models.User", b =>
                 {
-                    b.Navigation("ClientsCreators");
-
-                    b.Navigation("ClientsModificators");
+                    b.Navigation("Clients");
                 });
 #pragma warning restore 612, 618
         }

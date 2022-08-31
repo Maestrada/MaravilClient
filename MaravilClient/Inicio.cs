@@ -31,7 +31,7 @@ namespace MaravilClient
 
         private void btLogin_Click(object sender, EventArgs e)
         {
-            tbUser.Focus();
+            label1.Focus();
             if (string.IsNullOrEmpty( tbUser.Text) || string.IsNullOrEmpty(tbPass.Text)){
                 MessageBox.Show("Por favor, ingrese correctamente su usuario y contraseña","Maravil - Inicio de sesion",MessageBoxButtons.OK,MessageBoxIcon.Warning);
                 return;

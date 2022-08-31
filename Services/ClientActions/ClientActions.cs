@@ -48,24 +48,24 @@ namespace Services.ClientActions
             return clientContext.Clients.Find(id);
         }
 
-        public IEnumerable<Client> ListClient(string clientName,string lastName,string phone)
+        public List<Client> ListClient(string clientName,string lastName,string phone)
         {
-            IEnumerable<Client> returnData =  new List<Client>() ;
+            List<Client> returnData =  new List<Client>() ;
 
             if (!string.IsNullOrEmpty(clientName) || !string.IsNullOrEmpty(lastName) || !string.IsNullOrEmpty(phone))
             {
                 if (!string.IsNullOrEmpty(clientName) && !string.IsNullOrEmpty(lastName) && !string.IsNullOrEmpty(phone))
-                    returnData = (IEnumerable<Client>)clientContext.Clients.Select(x => x.Name.Contains(clientName.Trim()) || x.LastName.Contains(lastName.Trim())||x.CellPhone.Contains(phone.Trim())||x.CellPhone2.Contains(phone.Trim()));
+                    returnData = clientContext.Clients.Where(x => x.Name.Contains(clientName.Trim()) || x.LastName.Contains(lastName.Trim())||x.CellPhone.Contains(phone.Trim())||x.CellPhone2.Contains(phone.Trim())).ToList();
                 if (!string.IsNullOrEmpty(clientName) && string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(phone))
-                    returnData = (IEnumerable<Client>)clientContext.Clients.Select(x => x.Name.Contains(clientName.Trim()));
+                    returnData = clientContext.Clients.Where(x => x.Name.Contains(clientName.Trim())).ToList();
                 if (string.IsNullOrEmpty(clientName) && !string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(phone))
-                    returnData = (IEnumerable<Client>)clientContext.Clients.Select(x => x.LastName.Contains(lastName.Trim()));
+                    returnData = clientContext.Clients.Where(x => x.LastName.Contains(lastName.Trim())).ToList();
                 if (string.IsNullOrEmpty(clientName) && string.IsNullOrEmpty(lastName) && !string.IsNullOrEmpty(phone))
-                    returnData = (IEnumerable<Client>)clientContext.Clients.Select(x => x.CellPhone.Contains(phone.Trim()) || x.CellPhone2.Contains(phone.Trim()));
+                    returnData = clientContext.Clients.Where(x => x.CellPhone.Contains(phone.Trim()) || x.CellPhone2.Contains(phone.Trim())).ToList();
             }
             else
             {
-                returnData = (IEnumerable<Client>)clientContext.Clients.ToList();
+                returnData = clientContext.Clients.ToList();
             }
 
             return returnData;

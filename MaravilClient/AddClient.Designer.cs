@@ -49,6 +49,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(305, 29);
             this.txtName.TabIndex = 0;
+            this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyUp);
             // 
             // txtLastName
             // 
@@ -57,6 +58,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(305, 29);
             this.txtLastName.TabIndex = 1;
+            this.txtLastName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtLastName_KeyUp);
             // 
             // txtPhone
             // 
@@ -65,6 +67,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(305, 29);
             this.txtPhone.TabIndex = 2;
+            this.txtPhone.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPhone_KeyUp);
             // 
             // txtPhone2
             // 
@@ -73,6 +76,7 @@
             this.txtPhone2.Name = "txtPhone2";
             this.txtPhone2.Size = new System.Drawing.Size(305, 29);
             this.txtPhone2.TabIndex = 3;
+            this.txtPhone2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPhone2_KeyUp);
             // 
             // txtAddress
             // 
@@ -82,6 +86,7 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(305, 167);
             this.txtAddress.TabIndex = 4;
+            this.txtAddress.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAddress_KeyUp);
             // 
             // btnSave
             // 

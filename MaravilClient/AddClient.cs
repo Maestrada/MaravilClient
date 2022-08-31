@@ -29,10 +29,28 @@ namespace MaravilClient
         }
 
         private void btnSave_Click(object sender, EventArgs e)
-        {            
+        {
+            SaveClient();
+        }
+
+        private void ShowMessage(string message)
+        {
+            MessageBox.Show("Por favor introduzca: " + message, "Maravil - Nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void ClearFields()
+        {
+            txtName.Clear();
+            txtLastName.Clear();
+            txtPhone.Clear();
+            txtAddress.Clear();
+            txtPhone2.Clear();
+        }
+
+        private void SaveClient()
+        {
             if (MessageBox.Show("Esta seguro de continuar?", "Maravil - Nuevo cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-
                 string message = string.Empty;
 
                 if (string.IsNullOrEmpty(txtName.Text.Trim()))
@@ -49,9 +67,7 @@ namespace MaravilClient
                     ShowMessage(message);
                     return;
                 }
-
                 Client client = new Client();
-
                 try
                 {
                     client.Name = txtName.Text.Trim();
@@ -60,7 +76,9 @@ namespace MaravilClient
                     client.CellPhone2 = txtPhone2.Text.Trim();
                     client.Address = txtAddress.Text.Trim();
                     client.CreatedByUserId = loggedUser.Id;
-                    client.ModifiedByUserId = loggedUser.Id; 
+                    client.ModifiedByUserId = loggedUser.Id;
+
+                    label1.Focus();
 
                     if (clientActionsGlobal.CreateClient(client))
                         MessageBox.Show("Cliente agregado exitosamente. ", "Maravil - Nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); ;
@@ -69,12 +87,39 @@ namespace MaravilClient
                 {
                     MessageBox.Show("Error: " + ex.Message, "Maravil - Nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                ClearFields();
             }
         }
 
-        private void ShowMessage(string message)
+        private void txtAddress_KeyUp(object sender, KeyEventArgs e)
         {
-            MessageBox.Show("Por favor introduzca: " + message, "Maravil - Nuevo cliente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (e.KeyCode == Keys.Enter)
+                SaveClient();
+        }
+
+        private void txtPhone2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                txtAddress.Focus();
+
+        }
+
+        private void txtPhone_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                txtPhone2.Focus();
+        }
+
+        private void txtLastName_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                txtPhone.Focus();
+        }
+
+        private void txtName_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                txtLastName.Focus();
         }
     }
 }

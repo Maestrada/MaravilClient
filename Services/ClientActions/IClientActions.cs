@@ -13,6 +13,6 @@ namespace Services.ClientActions
         public bool UpdateClient(Client Client);
         public bool DeleteClient(Client Client);
         public Client? GetClient(int id);
-        public IEnumerable<Client> ListClient(string clientName,string lastName,string phone);
+        public List<Client> ListClient(string clientName,string lastName,string phone);
     }
 }
