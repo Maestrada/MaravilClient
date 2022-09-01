@@ -203,5 +203,12 @@ namespace MaravilClient
             if(e.KeyCode==Keys.Enter)
                 LoadDataGrid();
         }
+
+        private void editarClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditClient editClient = new EditClient(loggedUser,clientActionsGlobal);
+            editClient.ShowDialog();
+            LoadDataGrid();
+        }
     }
 }

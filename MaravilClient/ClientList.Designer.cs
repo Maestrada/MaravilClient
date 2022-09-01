@@ -61,6 +61,7 @@
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Imprimir = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.editarClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -86,7 +87,8 @@
             // 
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarClienteToolStripMenuItem,
-            this.borrarClienteToolStripMenuItem});
+            this.borrarClienteToolStripMenuItem,
+            this.editarClienteToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(121, 25);
             this.menuToolStripMenuItem.Text = "Menu Clientes";
@@ -407,6 +409,14 @@
             this.Imprimir.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Imprimir.Width = 70;
             // 
+            // editarClienteToolStripMenuItem
+            // 
+            this.editarClienteToolStripMenuItem.Name = "editarClienteToolStripMenuItem";
+            this.editarClienteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
+            this.editarClienteToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
+            this.editarClienteToolStripMenuItem.Text = "Editar Cliente";
+            this.editarClienteToolStripMenuItem.Click += new System.EventHandler(this.editarClienteToolStripMenuItem_Click);
+            // 
             // ClientList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -469,5 +479,6 @@
         private Button btnCheckAll;
         private Button btnShowPrintQeue;
         private Button btnAddPrintQeue;
+        private ToolStripMenuItem editarClienteToolStripMenuItem;
     }
 }
