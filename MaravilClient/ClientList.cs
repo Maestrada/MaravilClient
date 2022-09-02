@@ -49,7 +49,6 @@ namespace MaravilClient
 
         private void borrarClienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //revisar actualizacion de estado del datagrid al descheckear
             List<Client> clients = GetCheckedClients();
             if (clients.Count > 0)
             {
@@ -138,6 +137,8 @@ namespace MaravilClient
                         Address = item.Address,
                     });
             }
+
+            MessageBox.Show("Cola de impresion actualizada.", "Maravil - Eliminar cliente", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnShowPrintQeue_Click(object sender, EventArgs e)
@@ -209,6 +210,17 @@ namespace MaravilClient
             EditClient editClient = new EditClient(loggedUser,clientActionsGlobal);
             editClient.ShowDialog();
             LoadDataGrid();
+        }
+
+        private void btnUnMarkAll_Click(object sender, EventArgs e)
+        {
+            List<Client> lista = clientActionsGlobal.ListClient(txtName.Text, txtLastName.Text, txtPhone.Text).ToList();
+            dataGridView1.DataSource = null;
+            dataGridView1.Rows.Clear();
+            foreach (Client client in lista)
+            {                
+                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2.Trim()) ? "" : " / " + client.CellPhone2), client.Address, false);
+            }
         }
     }
 }

@@ -32,6 +32,7 @@
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.borrarClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verUsuariosDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarUsuarioDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +52,7 @@
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnUnMarkAll = new System.Windows.Forms.Button();
             this.btnCheckAll = new System.Windows.Forms.Button();
             this.btnShowPrintQeue = new System.Windows.Forms.Button();
             this.btnAddPrintQeue = new System.Windows.Forms.Button();
@@ -61,7 +63,6 @@
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Imprimir = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.editarClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -109,6 +110,14 @@
             this.borrarClienteToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
             this.borrarClienteToolStripMenuItem.Text = "Borrar Cliente";
             this.borrarClienteToolStripMenuItem.Click += new System.EventHandler(this.borrarClienteToolStripMenuItem_Click);
+            // 
+            // editarClienteToolStripMenuItem
+            // 
+            this.editarClienteToolStripMenuItem.Name = "editarClienteToolStripMenuItem";
+            this.editarClienteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
+            this.editarClienteToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
+            this.editarClienteToolStripMenuItem.Text = "Editar Cliente";
+            this.editarClienteToolStripMenuItem.Click += new System.EventHandler(this.editarClienteToolStripMenuItem_Click);
             // 
             // administracionToolStripMenuItem
             // 
@@ -291,6 +300,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.btnUnMarkAll);
             this.groupBox2.Controls.Add(this.btnCheckAll);
             this.groupBox2.Controls.Add(this.btnShowPrintQeue);
             this.groupBox2.Controls.Add(this.btnAddPrintQeue);
@@ -305,12 +315,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Clientes";
             // 
+            // btnUnMarkAll
+            // 
+            this.btnUnMarkAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUnMarkAll.ForeColor = System.Drawing.Color.Coral;
+            this.btnUnMarkAll.Location = new System.Drawing.Point(1053, 73);
+            this.btnUnMarkAll.Name = "btnUnMarkAll";
+            this.btnUnMarkAll.Size = new System.Drawing.Size(151, 38);
+            this.btnUnMarkAll.TabIndex = 4;
+            this.btnUnMarkAll.Text = "Desmarcar todos";
+            this.btnUnMarkAll.UseVisualStyleBackColor = true;
+            this.btnUnMarkAll.Click += new System.EventHandler(this.btnUnMarkAll_Click);
+            // 
             // btnCheckAll
             // 
             this.btnCheckAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckAll.Location = new System.Drawing.Point(1129, 29);
+            this.btnCheckAll.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.btnCheckAll.Location = new System.Drawing.Point(1053, 29);
             this.btnCheckAll.Name = "btnCheckAll";
-            this.btnCheckAll.Size = new System.Drawing.Size(75, 78);
+            this.btnCheckAll.Size = new System.Drawing.Size(151, 38);
             this.btnCheckAll.TabIndex = 3;
             this.btnCheckAll.Text = "Marcar todos";
             this.btnCheckAll.UseVisualStyleBackColor = true;
@@ -318,7 +341,7 @@
             // 
             // btnShowPrintQeue
             // 
-            this.btnShowPrintQeue.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnShowPrintQeue.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnShowPrintQeue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnShowPrintQeue.Location = new System.Drawing.Point(280, 29);
             this.btnShowPrintQeue.Name = "btnShowPrintQeue";
@@ -409,14 +432,6 @@
             this.Imprimir.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Imprimir.Width = 70;
             // 
-            // editarClienteToolStripMenuItem
-            // 
-            this.editarClienteToolStripMenuItem.Name = "editarClienteToolStripMenuItem";
-            this.editarClienteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.editarClienteToolStripMenuItem.Size = new System.Drawing.Size(240, 26);
-            this.editarClienteToolStripMenuItem.Text = "Editar Cliente";
-            this.editarClienteToolStripMenuItem.Click += new System.EventHandler(this.editarClienteToolStripMenuItem_Click);
-            // 
             // ClientList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -480,5 +495,7 @@
         private Button btnShowPrintQeue;
         private Button btnAddPrintQeue;
         private ToolStripMenuItem editarClienteToolStripMenuItem;
+        private Button button1;
+        private Button btnUnMarkAll;
     }
 }
