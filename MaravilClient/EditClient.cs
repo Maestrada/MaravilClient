@@ -14,11 +14,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace MaravilClient
 {
-    public class AuxiliarClass
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
     public partial class EditClient : Form
     {
         User loggedUser;
@@ -148,5 +143,10 @@ namespace MaravilClient
             txtPhone2.Clear();
         }
 
+    }
+    public class AuxiliarClass
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

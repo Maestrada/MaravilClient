@@ -1,4 +1,5 @@
 ﻿using BAL.Models;
+using Services.Resources;
 using Services.UserActions;
 using System;
 using System.Collections.Generic;
@@ -29,31 +30,39 @@ namespace MaravilClient
         }
 
         private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (txtNewPass.Text == txtNewPass.Text)
+        {  
+            string oldPass = loggedUser.Password;
+            if (txtNewPass.Text == txtNewPass.Text && Encrypt.GetSHA256(txtOldPass.Text)==loggedUser.Password)
             {
+
                 loggedUser.Password = txtNewPass.Text;
                 try
                 {
                     userActionsGlobal.UpdateUser(loggedUser);
-                    MessageBox.Show("Constraseña actualizada con exito!", "Maravil - Cambio de contraseña", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                    MessageBox.Show("Constraseña actualizada con exito!", "Maravil - Cambio de contraseña", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    loggedUser.Password=Encrypt.GetSHA256(txtNewPass.Text);
+                    txtNewPass.Clear();
+                    txtNewPassConf.Clear();
+                    txtOldPass.Clear();
+                    this.Close();
                 }
                 catch(Exception ex)
                 {
+                    loggedUser.Password = oldPass;
                     MessageBox.Show(ex.Message, "Maravil - Cambio de contraseña", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Contraseñas no coinciden","Maravil - Cambio de contraseña",MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                string message = Encrypt.GetSHA256(txtOldPass.Text) != loggedUser.Password ? "La contraseña anterior no coincide con la que ha escrito" : "Contraseñas no coinciden";
+                MessageBox.Show(message, "Maravil - Cambio de contraseña",MessageBoxButtons.OK,MessageBoxIcon.Stop);
             }
         }
 
 
         private void ValidatePasswords()
         {
-            if(txtNewPass.Text == txtNewPass.Text)
+            if(txtNewPass.Text == txtNewPassConf.Text)
             {
                 btnSave.Enabled = true;
                 lbConfirmation.Visible = false;

@@ -81,7 +81,8 @@ namespace MaravilClient
 
         private void cambiarMiContraseñaToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            ChangePassword changePassword = new ChangePassword(loggedUser, userActionsGlobal);
+            changePassword.ShowDialog();
         }
 
         private void ClientList_Load(object sender, EventArgs e)

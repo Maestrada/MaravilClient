@@ -43,6 +43,7 @@
             // 
             this.txtOldPass.Location = new System.Drawing.Point(198, 20);
             this.txtOldPass.Name = "txtOldPass";
+            this.txtOldPass.PasswordChar = '*';
             this.txtOldPass.Size = new System.Drawing.Size(232, 29);
             this.txtOldPass.TabIndex = 0;
             // 
@@ -50,6 +51,7 @@
             // 
             this.txtNewPass.Location = new System.Drawing.Point(198, 64);
             this.txtNewPass.Name = "txtNewPass";
+            this.txtNewPass.PasswordChar = '*';
             this.txtNewPass.Size = new System.Drawing.Size(232, 29);
             this.txtNewPass.TabIndex = 1;
             // 
@@ -57,6 +59,7 @@
             // 
             this.txtNewPassConf.Location = new System.Drawing.Point(198, 108);
             this.txtNewPassConf.Name = "txtNewPassConf";
+            this.txtNewPassConf.PasswordChar = '*';
             this.txtNewPassConf.Size = new System.Drawing.Size(232, 29);
             this.txtNewPassConf.TabIndex = 2;
             this.txtNewPassConf.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNewPassConf_KeyUp);
