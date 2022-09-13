@@ -216,6 +216,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditClient";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maravil - Editar Cliente";
             this.Load += new System.EventHandler(this.ClientEdit_Load);
             this.ResumeLayout(false);

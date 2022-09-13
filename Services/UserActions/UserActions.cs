@@ -19,8 +19,8 @@ namespace Services.UserActions
         }
 
         public bool CreateUser(User user)
-        {      
-            List<User> listUser = (List<User>)userContext.Users.Select(x => x.UserName == user.UserName.Trim());
+        {
+            List<User> listUser = userContext.Users.Where(x => x.UserName == user.UserName.Trim()).ToList();
 
             //UserNAme is being Used
             if (listUser != null && listUser.Any(x => x.UserName == user.UserName.Trim()))
@@ -71,7 +71,7 @@ namespace Services.UserActions
             return (!string.IsNullOrEmpty(userName)) ? userContext.Users.Where(x => x.UserName.Contains(userName.Trim())).ToList() : userContext.Users.ToList();
         }
 
-        public bool UpdateUser(User user)
+        public bool UpdateUser(User user, bool updatePassword = true)
         {
             bool result = false;
 
@@ -88,7 +88,9 @@ namespace Services.UserActions
             {
                 userToUpdate.ModifiedOn = DateTime.Now;
                 userToUpdate.UserName = user.UserName;
-                userToUpdate.Password = Encrypt.GetSHA256(user.Password);
+                if (updatePassword)
+                    userToUpdate.Password = Encrypt.GetSHA256(user.Password);
+
                 userContext.Update(userToUpdate);
                 userContext.SaveChanges();
                 result = true;

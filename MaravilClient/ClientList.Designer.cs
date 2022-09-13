@@ -35,8 +35,6 @@
             this.editarClienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verUsuariosDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.agregarUsuarioDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cambiarMiContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cambiarMiContraseñaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.sToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,8 +121,6 @@
             // 
             this.administracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.verUsuariosDelSistemaToolStripMenuItem,
-            this.agregarUsuarioDelSistemaToolStripMenuItem,
-            this.cambiarMiContraseñaToolStripMenuItem,
             this.toolStripSeparator1,
             this.cambiarMiContraseñaToolStripMenuItem1});
             this.administracionToolStripMenuItem.Name = "administracionToolStripMenuItem";
@@ -135,38 +131,20 @@
             // 
             this.verUsuariosDelSistemaToolStripMenuItem.Name = "verUsuariosDelSistemaToolStripMenuItem";
             this.verUsuariosDelSistemaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.U)));
-            this.verUsuariosDelSistemaToolStripMenuItem.Size = new System.Drawing.Size(376, 26);
+            this.verUsuariosDelSistemaToolStripMenuItem.Size = new System.Drawing.Size(303, 26);
             this.verUsuariosDelSistemaToolStripMenuItem.Text = "Ver Usuarios del Sistema";
             this.verUsuariosDelSistemaToolStripMenuItem.Click += new System.EventHandler(this.verUsuariosDelSistemaToolStripMenuItem_Click);
-            // 
-            // agregarUsuarioDelSistemaToolStripMenuItem
-            // 
-            this.agregarUsuarioDelSistemaToolStripMenuItem.Name = "agregarUsuarioDelSistemaToolStripMenuItem";
-            this.agregarUsuarioDelSistemaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.U)));
-            this.agregarUsuarioDelSistemaToolStripMenuItem.Size = new System.Drawing.Size(376, 26);
-            this.agregarUsuarioDelSistemaToolStripMenuItem.Text = "Agregar Usuario del sistema";
-            this.agregarUsuarioDelSistemaToolStripMenuItem.Click += new System.EventHandler(this.agregarUsuarioDelSistemaToolStripMenuItem_Click);
-            // 
-            // cambiarMiContraseñaToolStripMenuItem
-            // 
-            this.cambiarMiContraseñaToolStripMenuItem.Name = "cambiarMiContraseñaToolStripMenuItem";
-            this.cambiarMiContraseñaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.Delete)));
-            this.cambiarMiContraseñaToolStripMenuItem.Size = new System.Drawing.Size(376, 26);
-            this.cambiarMiContraseñaToolStripMenuItem.Text = "Eliminar usuario del Sistema";
-            this.cambiarMiContraseñaToolStripMenuItem.Click += new System.EventHandler(this.cambiarMiContraseñaToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(373, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(300, 6);
             // 
             // cambiarMiContraseñaToolStripMenuItem1
             // 
             this.cambiarMiContraseñaToolStripMenuItem1.Name = "cambiarMiContraseñaToolStripMenuItem1";
             this.cambiarMiContraseñaToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
-            this.cambiarMiContraseñaToolStripMenuItem1.Size = new System.Drawing.Size(376, 26);
+            this.cambiarMiContraseñaToolStripMenuItem1.Size = new System.Drawing.Size(303, 26);
             this.cambiarMiContraseñaToolStripMenuItem1.Text = "Cambiar mi contraseña";
             this.cambiarMiContraseñaToolStripMenuItem1.Click += new System.EventHandler(this.cambiarMiContraseñaToolStripMenuItem1_Click);
             // 
@@ -446,6 +424,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "ClientList";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clientes Maravil";
             this.Load += new System.EventHandler(this.ClientList_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -465,8 +444,6 @@
         private ToolStripMenuItem menuToolStripMenuItem;
         private ToolStripMenuItem administracionToolStripMenuItem;
         private ToolStripMenuItem verUsuariosDelSistemaToolStripMenuItem;
-        private ToolStripMenuItem agregarUsuarioDelSistemaToolStripMenuItem;
-        private ToolStripMenuItem cambiarMiContraseñaToolStripMenuItem;
         private ToolStripMenuItem agregarClienteToolStripMenuItem;
         private ToolStripMenuItem borrarClienteToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;

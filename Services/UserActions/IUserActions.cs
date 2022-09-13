@@ -10,7 +10,7 @@ namespace Services.UserActions
     public interface IUserActions
     {
         public bool CreateUser(User user);
-        public bool UpdateUser(User user);
+        public bool UpdateUser(User user, bool updatePassword = true);
         public bool DeleteUser(User user);
         public User? GetUser(int id);
         public List<User> ListUser(string userName);

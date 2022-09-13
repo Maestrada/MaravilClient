@@ -71,7 +71,8 @@ namespace MaravilClient
 
         private void verUsuariosDelSistemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            SystemUsers sysUser = new SystemUsers(loggedUser, userActionsGlobal);
+            sysUser.ShowDialog();
         }
 
         private void agregarUsuarioDelSistemaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -99,7 +100,6 @@ namespace MaravilClient
         {
             Application.Exit();
         }
-
 
         private void LoadDataGrid(bool checkAll = false)
         {

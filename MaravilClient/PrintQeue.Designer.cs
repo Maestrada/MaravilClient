@@ -32,12 +32,12 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.btnDeleteFromQeue = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefonos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDeleteFromQeue = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -96,18 +96,6 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView1_RowsRemoved);
             // 
-            // btnDeleteFromQeue
-            // 
-            this.btnDeleteFromQeue.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.btnDeleteFromQeue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDeleteFromQeue.Location = new System.Drawing.Point(396, 12);
-            this.btnDeleteFromQeue.Name = "btnDeleteFromQeue";
-            this.btnDeleteFromQeue.Size = new System.Drawing.Size(206, 83);
-            this.btnDeleteFromQeue.TabIndex = 1;
-            this.btnDeleteFromQeue.Text = "Quitar de la lista";
-            this.btnDeleteFromQeue.UseVisualStyleBackColor = false;
-            this.btnDeleteFromQeue.Click += new System.EventHandler(this.btnDeleteFromQeue_Click);
-            // 
             // Id
             // 
             this.Id.Frozen = true;
@@ -152,6 +140,18 @@
             this.Direccion.ToolTipText = "Quitar de la lista con la tecla DEL";
             this.Direccion.Width = 325;
             // 
+            // btnDeleteFromQeue
+            // 
+            this.btnDeleteFromQeue.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnDeleteFromQeue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnDeleteFromQeue.Location = new System.Drawing.Point(396, 12);
+            this.btnDeleteFromQeue.Name = "btnDeleteFromQeue";
+            this.btnDeleteFromQeue.Size = new System.Drawing.Size(206, 83);
+            this.btnDeleteFromQeue.TabIndex = 1;
+            this.btnDeleteFromQeue.Text = "Quitar de la lista";
+            this.btnDeleteFromQeue.UseVisualStyleBackColor = false;
+            this.btnDeleteFromQeue.Click += new System.EventHandler(this.btnDeleteFromQeue_Click);
+            // 
             // PrintQeue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -168,6 +168,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PrintQeue";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maravil - Cola de Impresion";
             this.Load += new System.EventHandler(this.PrintQeue_Load);
             this.groupBox1.ResumeLayout(false);

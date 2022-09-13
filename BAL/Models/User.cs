@@ -15,6 +15,8 @@ namespace BAL.Models
         public string Password { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ModifiedOn { get; set; }
+        public bool IsSystemAdmin { get; set; }
+        public bool ActiveStatus { get; set; }
         public List<Client> ClientsCreators { get; set; }
         public List<Client> ClientsModificators { get; set; }
     }

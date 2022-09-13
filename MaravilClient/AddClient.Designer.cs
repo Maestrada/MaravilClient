@@ -198,6 +198,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddClient";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maravil - Nuevo Cliente";
             this.ResumeLayout(false);
             this.PerformLayout();

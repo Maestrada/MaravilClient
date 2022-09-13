@@ -151,7 +151,7 @@
             this.MinimizeBox = false;
             this.Name = "ChangePassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ChangePassword";
+            this.Text = "Maravil - Cambiar contraseña";
             this.ResumeLayout(false);
             this.PerformLayout();
 
