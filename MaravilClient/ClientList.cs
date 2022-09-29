@@ -1,6 +1,8 @@
 ﻿using BAL.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Services.ClientActions;
+using Services.StatesActions;
+using Services.TownActions;
 using Services.UserActions;
 using System;
 using System.Collections.Generic;
@@ -19,14 +21,19 @@ namespace MaravilClient
         private User loggedUser;
         private readonly IUserActions userActionsGlobal;
         private readonly IClientActions clientActionsGlobal;
+        private readonly IStateActions stateActionsGlobal;
+        private readonly ITonwActions tonwActionsGlobal;
         private List<Client> clientsToPrint;
+        List<State> states;
 
-        public ClientList(User user, IUserActions userActions, IClientActions clientActions)
+        public ClientList(User user, IUserActions userActions, IClientActions clientActions, IStateActions stateActions, ITonwActions tonwActions)
         {
             InitializeComponent();
             loggedUser = user;
-            userActionsGlobal = userActions;
-            clientActionsGlobal = clientActions;
+            this.userActionsGlobal = userActions;
+            this.clientActionsGlobal = clientActions;
+            this.stateActionsGlobal = stateActions;
+            this.tonwActionsGlobal = tonwActions;
             clientsToPrint = new List<Client>();
         }
 
@@ -42,7 +49,7 @@ namespace MaravilClient
 
         private void agregarClienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddClient addClient = new AddClient(loggedUser, clientActionsGlobal);
+            AddClient addClient = new AddClient(loggedUser, clientActionsGlobal,stateActionsGlobal,tonwActionsGlobal);
             addClient.ShowDialog();
             LoadDataGrid();
         }
@@ -88,7 +95,23 @@ namespace MaravilClient
 
         private void ClientList_Load(object sender, EventArgs e)
         {
+            LoadStates();
             LoadDataGrid();
+        }
+
+        private void LoadStates()
+        {
+            states = stateActionsGlobal.GetStates(String.Empty);
+            states.Insert(0,new State()
+            {
+                Id = 0,
+                Name = "Todos"
+            });
+
+            cbState.DataSource = states;
+            cbState.DisplayMember = "Name";
+            cbState.ValueMember = "Id";
+            cbState.SelectedValue = 0;
         }
 
         private void cerrarSesionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -103,13 +126,13 @@ namespace MaravilClient
 
         private void LoadDataGrid(bool checkAll = false)
         {
-            List<Client> lista = clientActionsGlobal.ListClient(txtName.Text, txtLastName.Text, txtPhone.Text).ToList();
+            List<Client> lista = clientActionsGlobal.ListClient(txtName.Text, txtLastName.Text, txtPhone.Text, GetStateId()).ToList();
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
             foreach (Client client in lista)
             {
                 bool selectedData = clientsToPrint.Any(x=>x.Id==client.Id) || checkAll;
-                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2.Trim()) ? "" : " / " + client.CellPhone2), client.Address, selectedData);
+                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2.Trim()) ? "" : " / " + client.CellPhone2), client.Town.Name+", "+ client.Town.State.Name+", "+ client.Address, selectedData);
             }
         }
         private void CleanTextBoxes()
@@ -208,20 +231,34 @@ namespace MaravilClient
 
         private void editarClienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditClient editClient = new EditClient(loggedUser,clientActionsGlobal);
+            EditClient editClient = new EditClient(loggedUser,clientActionsGlobal, stateActionsGlobal, tonwActionsGlobal);
             editClient.ShowDialog();
             LoadDataGrid();
         }
 
         private void btnUnMarkAll_Click(object sender, EventArgs e)
         {
-            List<Client> lista = clientActionsGlobal.ListClient(txtName.Text, txtLastName.Text, txtPhone.Text).ToList();
+            List<Client> lista = clientActionsGlobal.ListClient(txtName.Text, txtLastName.Text, txtPhone.Text,GetStateId()).ToList();
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
             foreach (Client client in lista)
-            {                
-                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2.Trim()) ? "" : " / " + client.CellPhone2), client.Address, false);
+            {
+                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2.Trim()) ? "" : " / " + client.CellPhone2), client.Town.Name + ", " + client.Town.State.Name + ", " + client.Address,false);
             }
+        }
+
+        private int GetStateId()
+        {
+            return ((dynamic)cbState.SelectedItem).Id;
+        }
+
+        private void btClean_Click(object sender, EventArgs e)
+        {
+            txtLastName.Clear();
+            txtName.Clear();
+            txtPhone.Clear();
+            cbState.SelectedValue = 0;
+            LoadDataGrid();
         }
     }
 }

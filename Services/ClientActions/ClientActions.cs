@@ -1,5 +1,6 @@
 ﻿using BAL.Models;
 using DAL.DataContext;
+using Microsoft.EntityFrameworkCore;
 using Services.Resources;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Services.ClientActions
 {
-    public class ClientActions:IClientActions
+    public class ClientActions : IClientActions
     {
         private MaravilContext clientContext;
         public ClientActions(MaravilContext context)
@@ -20,7 +21,7 @@ namespace Services.ClientActions
         public bool CreateClient(Client client)
         {
             client.CreatedOn = DateTime.Now;
-            client.ModifiedOn  = DateTime.Now;
+            client.ModifiedOn = DateTime.Now;
             clientContext.Add(client);
             clientContext.SaveChanges();
             return true;
@@ -48,37 +49,35 @@ namespace Services.ClientActions
             return clientContext.Clients.Find(id);
         }
 
-        public List<Client> ListClient(string clientName,string lastName,string phone)
+        public List<Client> ListClient(string clientName, string lastName, string phone, int stateId)
         {
-            List<Client> returnData =  new List<Client>() ;
+            List<Client> returnData = clientContext.Set<Client>()
+                                                   .Include(x => x.Town)
+                                                   .Include(x => x.Town.State)
+                                                   .Include(x => x.CreatedByUser)
+                                                   .Include(x => x.ModifiedByUser)
+                                                   .ToList();
 
-            if (!string.IsNullOrEmpty(clientName) || !string.IsNullOrEmpty(lastName) || !string.IsNullOrEmpty(phone))
-            {
-                if (!string.IsNullOrEmpty(clientName) && !string.IsNullOrEmpty(lastName) && !string.IsNullOrEmpty(phone))
-                    returnData = clientContext.Clients.Where(x => x.Name.Contains(clientName.Trim()) || x.LastName.Contains(lastName.Trim())||x.CellPhone.Contains(phone.Trim())||x.CellPhone2.Contains(phone.Trim())).ToList();
-                if (!string.IsNullOrEmpty(clientName) && string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(phone))
-                    returnData = clientContext.Clients.Where(x => x.Name.Contains(clientName.Trim())).ToList();
-                if (string.IsNullOrEmpty(clientName) && !string.IsNullOrEmpty(lastName) && string.IsNullOrEmpty(phone))
-                    returnData = clientContext.Clients.Where(x => x.LastName.Contains(lastName.Trim())).ToList();
-                if (string.IsNullOrEmpty(clientName) && string.IsNullOrEmpty(lastName) && !string.IsNullOrEmpty(phone))
-                    returnData = clientContext.Clients.Where(x => x.CellPhone.Contains(phone.Trim()) || x.CellPhone2.Contains(phone.Trim())).ToList();
-            }
-            else
-            {
-                returnData = clientContext.Clients.ToList();
-            }
+            if (!string.IsNullOrEmpty(clientName))
+                returnData = returnData.Where(x => x.Name.Contains(clientName.Trim())).ToList();
+            if (!string.IsNullOrEmpty(lastName))
+                returnData = returnData.Where(x => x.LastName.Contains(lastName.Trim())).ToList();
+            if (!string.IsNullOrEmpty(phone))
+                returnData = returnData.Where(x => x.CellPhone.Contains(phone.Trim()) || x.CellPhone2.Contains(phone.Trim())).ToList();
+            if (stateId > 0)
+                returnData = returnData.Where(x => x.Town.StateId == stateId).ToList();
 
             return returnData;
         }
 
         public bool UpdateClient(Client client)
         {
-            bool result = false;          
-
-            Client? userToUpdate = GetClient(client.Id);
-            if (userToUpdate != null)
+            bool result = false;
+            if (client != null)
             {
-                userToUpdate.ModifiedOn = DateTime.Now;                
+                client.ModifiedOn = DateTime.Now;
+                clientContext.Clients.Update(client);
+                clientContext.SaveChanges();
                 result = true;
             }
             else

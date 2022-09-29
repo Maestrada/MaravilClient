@@ -42,6 +42,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.salirDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblDep = new System.Windows.Forms.Label();
+            this.cbState = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,6 +63,7 @@
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Imprimir = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btClean = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -181,6 +184,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btClean);
+            this.groupBox1.Controls.Add(this.lblDep);
+            this.groupBox1.Controls.Add(this.cbState);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -197,6 +203,24 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de busqueda";
+            // 
+            // lblDep
+            // 
+            this.lblDep.AutoSize = true;
+            this.lblDep.Location = new System.Drawing.Point(15, 79);
+            this.lblDep.Name = "lblDep";
+            this.lblDep.Size = new System.Drawing.Size(110, 21);
+            this.lblDep.TabIndex = 9;
+            this.lblDep.Text = "Departamento";
+            // 
+            // cbState
+            // 
+            this.cbState.FormattingEnabled = true;
+            this.cbState.Location = new System.Drawing.Point(131, 76);
+            this.cbState.Name = "cbState";
+            this.cbState.Size = new System.Drawing.Size(223, 29);
+            this.cbState.TabIndex = 4;
+            this.cbState.SelectedIndexChanged += new System.EventHandler(this.btBuscarCliente_Click);
             // 
             // label3
             // 
@@ -239,11 +263,11 @@
             this.btnSearch.BackColor = System.Drawing.Color.CornflowerBlue;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSearch.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSearch.Location = new System.Drawing.Point(1036, 30);
+            this.btnSearch.Location = new System.Drawing.Point(1072, 18);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(96, 50);
-            this.btnSearch.TabIndex = 4;
+            this.btnSearch.TabIndex = 5;
             this.btnSearch.Text = "Buscar";
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btBuscarCliente_Click);
@@ -410,6 +434,18 @@
             this.Imprimir.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Imprimir.Width = 70;
             // 
+            // btClean
+            // 
+            this.btClean.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btClean.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btClean.Location = new System.Drawing.Point(1072, 70);
+            this.btClean.Name = "btClean";
+            this.btClean.Size = new System.Drawing.Size(96, 30);
+            this.btClean.TabIndex = 6;
+            this.btClean.Text = "Limpiar";
+            this.btClean.UseVisualStyleBackColor = false;
+            this.btClean.Click += new System.EventHandler(this.btClean_Click);
+            // 
             // ClientList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -474,5 +510,8 @@
         private ToolStripMenuItem editarClienteToolStripMenuItem;
         private Button button1;
         private Button btnUnMarkAll;
+        private Label lblDep;
+        private ComboBox cbState;
+        private Button btClean;
     }
 }

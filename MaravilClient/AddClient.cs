@@ -1,5 +1,7 @@
 ﻿using BAL.Models;
 using Services.ClientActions;
+using Services.StatesActions;
+using Services.TownActions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,11 +18,18 @@ namespace MaravilClient
     {
         User loggedUser;
         private readonly IClientActions clientActionsGlobal;
-        public AddClient(User user, IClientActions clientActions)
+        private readonly IStateActions stateActionsGlobal;
+        private readonly ITonwActions tonwActionsGlobal;
+
+        List<State> states;
+        List<Town> towns;
+        public AddClient(User user, IClientActions clientActions, IStateActions stateActions, ITonwActions tonwActions)
         {
             InitializeComponent();
             this.loggedUser = user;
             this.clientActionsGlobal = clientActions;
+            this.stateActionsGlobal = stateActions;
+            this.tonwActionsGlobal = tonwActions;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -45,6 +54,8 @@ namespace MaravilClient
             txtPhone.Clear();
             txtAddress.Clear();
             txtPhone2.Clear();
+            cbState.SelectedIndex = 0;
+            cbTown.SelectedIndex = 0;
         }
 
         private void SaveClient()
@@ -61,6 +72,10 @@ namespace MaravilClient
                     message += "\n -Phone";
                 if (string.IsNullOrEmpty(txtAddress.Text.Trim()))
                     message += "\n -Direccion";
+                if (GetStateId() <= 0)
+                    message += "\n -Departamento";
+                if (GetTownId() <= 0)
+                    message += "\n -Municipio";
 
                 if (!string.IsNullOrEmpty(message))
                 {
@@ -77,6 +92,7 @@ namespace MaravilClient
                     client.Address = txtAddress.Text.Trim();
                     client.CreatedByUserId = loggedUser.Id;
                     client.ModifiedByUserId = loggedUser.Id;
+                    client.TownId = GetTownId();
 
                     label1.Focus();
 
@@ -120,6 +136,32 @@ namespace MaravilClient
         {
             if (e.KeyCode == Keys.Enter)
                 txtLastName.Focus();
+        }
+
+        private void cbState_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbTown.DataSource = towns.Where(x => x.StateId == GetStateId()).ToList();
+            cbTown.DisplayMember = "Name";
+            cbTown.ValueMember = "Id";
+        }
+
+        private void AddClient_Load(object sender, EventArgs e)
+        {
+            towns = tonwActionsGlobal.GetTowns(String.Empty);
+            states = stateActionsGlobal.GetStates(String.Empty);           
+            cbState.DataSource =states;
+            cbState.DisplayMember = "Name";
+            cbState.ValueMember = "Id";
+           
+        }
+
+        private int GetTownId()
+        {
+            return ((dynamic)cbTown.SelectedItem).Id;
+        }
+        private int GetStateId()
+        {
+            return ((dynamic)cbState.SelectedItem).Id;
         }
     }
 }

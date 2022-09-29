@@ -1,6 +1,8 @@
 ﻿using BAL.Models;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using Services.ClientActions;
+using Services.StatesActions;
+using Services.TownActions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,25 +21,48 @@ namespace MaravilClient
         User loggedUser;
         Client selectedClient;
         List<Client> clients;
+        List<State> states;
+        List<Town> towns;
+
         private readonly IClientActions clientActionsGlobal;
-        public EditClient(User user, IClientActions clientActions)
+        private readonly IStateActions stateActionsGlobal;
+        private readonly ITonwActions tonwActionsGlobal;
+
+        public EditClient(User user, IClientActions clientActions, IStateActions stateActions, ITonwActions tonwActions)
         {
             InitializeComponent();
             loggedUser = user;
             clientActionsGlobal = clientActions;
+            this.stateActionsGlobal = stateActions;
+            this.tonwActionsGlobal = tonwActions;
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void ClientEdit_Load(object sender, EventArgs e)
         {
             GetAllWorkData();
         }
-
         private void GetAllWorkData()
+        {
+            LoadStateTownData();
+            LoadClientData();
+            ClearFields();
+        }
+        private void LoadStateTownData()
+        {
+            towns = tonwActionsGlobal.GetTowns(String.Empty);
+            states = stateActionsGlobal.GetStates(String.Empty);
+            cbState.DataSource = states;
+            cbState.DisplayMember = "Name";
+            cbState.ValueMember = "Id";
+
+            cbTown.DataSource = towns;
+            cbTown.ValueMember = "Id";
+            cbTown.DisplayMember = "Name";
+        }
+        private void LoadClientData()
         {
             clients = GetClients();
             cbClient.Items.Clear();
@@ -51,12 +76,10 @@ namespace MaravilClient
             cbClient.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
             cbClient.ResetText();
-            ClearFields();
         }
-
         private List<Client> GetClients()
         {
-            return clientActionsGlobal.ListClient(string.Empty, string.Empty, string.Empty);
+            return clientActionsGlobal.ListClient(string.Empty, string.Empty, string.Empty,0);
         }
         private AutoCompleteStringCollection LoadAutoComplete(List<Client> listClients)
         {
@@ -69,17 +92,14 @@ namespace MaravilClient
 
             return stringCol;
         }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveClient();
         }
-
         private void ShowMessage(string message)
         {
             MessageBox.Show("Por favor introduzca: " + message, "Maravil - Editar cliente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
-
         private void SaveClient()
         {
             if (MessageBox.Show("Esta seguro de continuar?", "Maravil - Editar cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -94,6 +114,10 @@ namespace MaravilClient
                     message += "\n -Phone";
                 if (string.IsNullOrEmpty(txtAddress.Text.Trim()))
                     message += "\n -Direccion";
+                if (GetStateId() <= 0)
+                    message += "\n -Departamento";
+                if (GetTownId() <= 0)
+                    message += "\n -Municipio";
 
                 if (!string.IsNullOrEmpty(message))
                 {
@@ -108,8 +132,8 @@ namespace MaravilClient
                     selectedClient.CellPhone = txtPhone.Text.Trim();
                     selectedClient.CellPhone2 = txtPhone2.Text.Trim();
                     selectedClient.Address = txtAddress.Text.Trim();
-                    selectedClient.CreatedByUserId = loggedUser.Id;
                     selectedClient.ModifiedByUserId = loggedUser.Id;
+                    selectedClient.TownId = GetTownId();
 
                     label1.Focus();
 
@@ -123,17 +147,31 @@ namespace MaravilClient
                 ClearFields();
             }
         }
-
         private void cbClient_SelectedIndexChanged(object sender, EventArgs e)
         { 
-            selectedClient = clients.First(x => x.Id == ((dynamic)cbClient.SelectedItem).Id);
+            selectedClient = clients.First(x => x.Id == GetClientId());
             txtName.Text = selectedClient.Name;
             txtLastName.Text = selectedClient.LastName;
             txtPhone2.Text = selectedClient.CellPhone2;
             txtPhone.Text = selectedClient.CellPhone;
             txtAddress.Text = selectedClient.Address;
+            cbState.SelectedValue =  selectedClient.Town.StateId;            
+            cbTown.SelectedValue = selectedClient.TownId;
+            Thread.Sleep(200); 
+            if(GetStateId()!= selectedClient.Town.StateId)
+            {
+                cbState.SelectedValue = selectedClient.Town.StateId;
+            }
+            if (GetTownId() != selectedClient.TownId)
+            {
+                cbTown.SelectedValue = selectedClient.TownId;
+            }
+            Thread.Sleep(200);
         }
-
+        private int GetClientId()
+        {
+            return ((dynamic)cbClient.SelectedItem).Id;
+        }
         private void ClearFields()
         {
             txtName.Clear();
@@ -141,12 +179,22 @@ namespace MaravilClient
             txtPhone.Clear();
             txtAddress.Clear();
             txtPhone2.Clear();
+            cbState.ResetText();    
+            cbTown.ResetText(); 
         }
-
-    }
-    public class AuxiliarClass
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        private void cbState_SelectedIndexChanged(object sender, EventArgs e)
+        {           
+            cbTown.DataSource = towns.Where(x => x.StateId == GetStateId()).ToList();
+            cbTown.DisplayMember = "Name";
+            cbTown.ValueMember = "Id";
+        }
+        private int GetTownId()
+        {
+            return ((dynamic)cbTown.SelectedItem).Id;
+        }
+        private int GetStateId()
+        {
+            return ((dynamic)cbState.SelectedItem).Id;
+        }
     }
 }

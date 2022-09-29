@@ -1,6 +1,8 @@
 
 using BAL.Models;
 using Services.ClientActions;
+using Services.StatesActions;
+using Services.TownActions;
 using Services.UserActions;
 using System.ComponentModel.Design;
 using System.Configuration;
@@ -12,11 +14,15 @@ namespace MaravilClient
         User? logedUser =  null;
         private readonly IUserActions userActionsGlobal;
         private readonly IClientActions clientActionsGlobal ;
-        public Inicio(IUserActions userActions, IClientActions clientActions)
+        private readonly IStateActions stateActionsGlobal ;
+        private readonly ITonwActions tonwActionsGlobal ;
+        public Inicio(IUserActions userActions, IClientActions clientActions, IStateActions stateActions, ITonwActions tonwActions)
         {
             InitializeComponent();
             this.userActionsGlobal = userActions;   
             this.clientActionsGlobal = clientActions;
+            this.stateActionsGlobal = stateActions;
+            this.tonwActionsGlobal = tonwActions;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,7 +48,7 @@ namespace MaravilClient
             if (logedUser != null)
             {
                 this.Hide();
-                ClientList frmCLients = new ClientList(logedUser,userActionsGlobal, clientActionsGlobal);
+                ClientList frmCLients = new ClientList(logedUser,userActionsGlobal, clientActionsGlobal,stateActionsGlobal,tonwActionsGlobal);
                 frmCLients.FormClosed += (s, args) => this.Show();
                 frmCLients.Show();
             }

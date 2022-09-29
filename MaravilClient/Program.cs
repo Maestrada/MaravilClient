@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.ClientActions;
+using Services.StatesActions;
+using Services.TownActions;
 using Services.UserActions;
 using System.Configuration;
 using System.Windows.Forms;
@@ -42,6 +44,8 @@ namespace MaravilClient
                                                    options.UseSqlServer(context.Configuration.GetConnectionString("SQLConnection")));
                     services.AddTransient<IUserActions, UserActions>();
                     services.AddTransient<IClientActions, ClientActions>();
+                    services.AddTransient<IStateActions, StateActions>();
+                    services.AddTransient<ITonwActions, TonwActions>();
                     services.AddTransient<Inicio>();
                 });
         }       

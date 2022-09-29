@@ -40,6 +40,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbState = new System.Windows.Forms.ComboBox();
+            this.cbTown = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txtName
@@ -80,23 +84,23 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(149, 291);
+            this.txtAddress.Location = new System.Drawing.Point(149, 402);
             this.txtAddress.Margin = new System.Windows.Forms.Padding(4);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(305, 167);
-            this.txtAddress.TabIndex = 4;
+            this.txtAddress.TabIndex = 6;
             this.txtAddress.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAddress_KeyUp);
             // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.CornflowerBlue;
             this.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSave.Location = new System.Drawing.Point(149, 466);
+            this.btnSave.Location = new System.Drawing.Point(149, 577);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(96, 47);
-            this.btnSave.TabIndex = 5;
+            this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Guardar";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -105,11 +109,11 @@
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Coral;
             this.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCancel.Location = new System.Drawing.Point(312, 466);
+            this.btnCancel.Location = new System.Drawing.Point(312, 577);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(96, 47);
-            this.btnCancel.TabIndex = 6;
+            this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -168,19 +172,60 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label5.ForeColor = System.Drawing.Color.MediumBlue;
-            this.label5.Location = new System.Drawing.Point(21, 291);
+            this.label5.Location = new System.Drawing.Point(21, 402);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 21);
             this.label5.TabIndex = 11;
             this.label5.Text = "* Direccion";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.MediumBlue;
+            this.label6.Location = new System.Drawing.Point(-1, 281);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(110, 21);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Departamento";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.MediumBlue;
+            this.label7.Location = new System.Drawing.Point(29, 334);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(79, 21);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Municipio";
+            // 
+            // cbState
+            // 
+            this.cbState.FormattingEnabled = true;
+            this.cbState.Location = new System.Drawing.Point(149, 273);
+            this.cbState.Name = "cbState";
+            this.cbState.Size = new System.Drawing.Size(305, 29);
+            this.cbState.TabIndex = 4;
+            this.cbState.SelectedIndexChanged += new System.EventHandler(this.cbState_SelectedIndexChanged);
+            // 
+            // cbTown
+            // 
+            this.cbTown.FormattingEnabled = true;
+            this.cbTown.Location = new System.Drawing.Point(149, 331);
+            this.cbTown.Name = "cbTown";
+            this.cbTown.Size = new System.Drawing.Size(305, 29);
+            this.cbTown.TabIndex = 5;
+            // 
             // AddClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(487, 542);
+            this.ClientSize = new System.Drawing.Size(487, 660);
+            this.Controls.Add(this.cbTown);
+            this.Controls.Add(this.cbState);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -200,6 +245,7 @@
             this.Name = "AddClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maravil - Nuevo Cliente";
+            this.Load += new System.EventHandler(this.AddClient_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,5 +265,9 @@
         private Label label3;
         private Label label4;
         private Label label5;
+        private Label label6;
+        private Label label7;
+        private ComboBox cbState;
+        private ComboBox cbTown;
     }
 }

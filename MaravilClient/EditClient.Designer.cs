@@ -42,6 +42,10 @@
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
+            this.cbTown = new System.Windows.Forms.ComboBox();
+            this.cbState = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -67,7 +71,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label5.ForeColor = System.Drawing.Color.MediumBlue;
-            this.label5.Location = new System.Drawing.Point(42, 369);
+            this.label5.Location = new System.Drawing.Point(42, 477);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 21);
@@ -127,11 +131,11 @@
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Coral;
             this.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCancel.Location = new System.Drawing.Point(377, 544);
+            this.btnCancel.Location = new System.Drawing.Point(377, 652);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 47);
-            this.btnCancel.TabIndex = 7;
+            this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -140,23 +144,23 @@
             // 
             this.btnSave.BackColor = System.Drawing.Color.CornflowerBlue;
             this.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSave.Location = new System.Drawing.Point(170, 544);
+            this.btnSave.Location = new System.Drawing.Point(170, 652);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(125, 47);
-            this.btnSave.TabIndex = 6;
+            this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Guardar";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(170, 369);
+            this.txtAddress.Location = new System.Drawing.Point(170, 477);
             this.txtAddress.Margin = new System.Windows.Forms.Padding(4);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(331, 167);
-            this.txtAddress.TabIndex = 5;
+            this.txtAddress.TabIndex = 7;
             // 
             // txtPhone2
             // 
@@ -190,12 +194,53 @@
             this.txtName.Size = new System.Drawing.Size(331, 29);
             this.txtName.TabIndex = 1;
             // 
+            // cbTown
+            // 
+            this.cbTown.FormattingEnabled = true;
+            this.cbTown.Location = new System.Drawing.Point(170, 413);
+            this.cbTown.Name = "cbTown";
+            this.cbTown.Size = new System.Drawing.Size(331, 29);
+            this.cbTown.TabIndex = 6;
+            // 
+            // cbState
+            // 
+            this.cbState.FormattingEnabled = true;
+            this.cbState.Location = new System.Drawing.Point(170, 355);
+            this.cbState.Name = "cbState";
+            this.cbState.Size = new System.Drawing.Size(331, 29);
+            this.cbState.TabIndex = 5;
+            this.cbState.SelectedIndexChanged += new System.EventHandler(this.cbState_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.MediumBlue;
+            this.label7.Location = new System.Drawing.Point(50, 416);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(79, 21);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "Municipio";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.MediumBlue;
+            this.label8.Location = new System.Drawing.Point(20, 363);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(110, 21);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Departamento";
+            // 
             // EditClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(559, 630);
+            this.ClientSize = new System.Drawing.Size(559, 727);
+            this.Controls.Add(this.cbTown);
+            this.Controls.Add(this.cbState);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -240,5 +285,9 @@
         private TextBox txtPhone;
         private TextBox txtLastName;
         private TextBox txtName;
+        private ComboBox cbTown;
+        private ComboBox cbState;
+        private Label label7;
+        private Label label8;
     }
 }
