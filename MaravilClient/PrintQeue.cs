@@ -87,7 +87,7 @@ namespace MaravilClient
 
             //deleting the file after 5 seconds
             Thread.Sleep(5000);
-          //  File.Delete(newFile);
+            File.Delete(newFile);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
