@@ -48,7 +48,6 @@ namespace MaravilClient
         {
             LoadStateTownData();
             LoadClientData();
-            ClearFields();
         }
         private void LoadStateTownData()
         {
@@ -75,7 +74,7 @@ namespace MaravilClient
             cbClient.AutoCompleteMode = AutoCompleteMode.Suggest;
             cbClient.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-            cbClient.ResetText();
+           
         }
         private List<Client> GetClients()
         {
@@ -144,7 +143,6 @@ namespace MaravilClient
                 {
                     MessageBox.Show("Error: " + ex.Message, "Maravil - Editar cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                ClearFields();
             }
         }
         private void cbClient_SelectedIndexChanged(object sender, EventArgs e)
@@ -155,33 +153,15 @@ namespace MaravilClient
             txtPhone2.Text = selectedClient.CellPhone2;
             txtPhone.Text = selectedClient.CellPhone;
             txtAddress.Text = selectedClient.Address;
-            cbState.SelectedValue =  selectedClient.Town.StateId;            
-            cbTown.SelectedValue = selectedClient.TownId;
-            Thread.Sleep(200); 
-            if(GetStateId()!= selectedClient.Town.StateId)
-            {
-                cbState.SelectedValue = selectedClient.Town.StateId;
-            }
-            if (GetTownId() != selectedClient.TownId)
-            {
-                cbTown.SelectedValue = selectedClient.TownId;
-            }
+            cbState.SelectedValue =  selectedClient.Town.StateId;     
             Thread.Sleep(200);
+            cbTown.SelectedValue = selectedClient.TownId;            
         }
         private int GetClientId()
         {
             return ((dynamic)cbClient.SelectedItem).Id;
         }
-        private void ClearFields()
-        {
-            txtName.Clear();
-            txtLastName.Clear();
-            txtPhone.Clear();
-            txtAddress.Clear();
-            txtPhone2.Clear();
-            cbState.ResetText();    
-            cbTown.ResetText(); 
-        }
+      
         private void cbState_SelectedIndexChanged(object sender, EventArgs e)
         {           
             cbTown.DataSource = towns.Where(x => x.StateId == GetStateId()).ToList();
