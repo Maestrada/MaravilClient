@@ -38,6 +38,7 @@
             this.Telefonos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDeleteFromQeue = new System.Windows.Forms.Button();
+            this.printMaravil = new System.Drawing.Printing.PrintDocument();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -150,7 +151,7 @@
             this.btnDeleteFromQeue.TabIndex = 1;
             this.btnDeleteFromQeue.Text = "Quitar de la lista";
             this.btnDeleteFromQeue.UseVisualStyleBackColor = false;
-            this.btnDeleteFromQeue.Click += new System.EventHandler(this.btnDeleteFromQeue_Click);
+            this.btnDeleteFromQeue.Click += new System.EventHandler(this.btnDeleteFromQeue_Click);            
             // 
             // PrintQeue
             // 
@@ -189,5 +190,6 @@
         private DataGridViewTextBoxColumn Apellidos;
         private DataGridViewTextBoxColumn Telefonos;
         private DataGridViewTextBoxColumn Direccion;
+        private System.Drawing.Printing.PrintDocument printMaravil;
     }
 }
