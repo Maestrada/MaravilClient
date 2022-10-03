@@ -32,13 +32,14 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnDeleteFromQeue = new System.Windows.Forms.Button();
+            this.printMaravil = new System.Drawing.Printing.PrintDocument();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombres = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefonos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnDeleteFromQeue = new System.Windows.Forms.Button();
-            this.printMaravil = new System.Drawing.Printing.PrintDocument();
+            this.Reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +60,7 @@
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Coral;
             this.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCancel.Location = new System.Drawing.Point(608, 12);
+            this.btnCancel.Location = new System.Drawing.Point(800, 12);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(375, 83);
             this.btnCancel.TabIndex = 2;
@@ -72,7 +73,7 @@
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(12, 101);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(974, 521);
+            this.groupBox1.Size = new System.Drawing.Size(1166, 521);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Clientes";
@@ -86,16 +87,29 @@
             this.Nombres,
             this.Apellidos,
             this.Telefonos,
-            this.Direccion});
+            this.Direccion,
+            this.Reference});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 25);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(968, 493);
+            this.dataGridView1.Size = new System.Drawing.Size(1160, 493);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView1_RowsRemoved);
+            // 
+            // btnDeleteFromQeue
+            // 
+            this.btnDeleteFromQeue.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnDeleteFromQeue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnDeleteFromQeue.Location = new System.Drawing.Point(396, 12);
+            this.btnDeleteFromQeue.Name = "btnDeleteFromQeue";
+            this.btnDeleteFromQeue.Size = new System.Drawing.Size(398, 83);
+            this.btnDeleteFromQeue.TabIndex = 1;
+            this.btnDeleteFromQeue.Text = "Quitar de la lista";
+            this.btnDeleteFromQeue.UseVisualStyleBackColor = false;
+            this.btnDeleteFromQeue.Click += new System.EventHandler(this.btnDeleteFromQeue_Click);
             // 
             // Id
             // 
@@ -141,24 +155,20 @@
             this.Direccion.ToolTipText = "Quitar de la lista con la tecla DEL";
             this.Direccion.Width = 325;
             // 
-            // btnDeleteFromQeue
+            // Reference
             // 
-            this.btnDeleteFromQeue.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.btnDeleteFromQeue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDeleteFromQeue.Location = new System.Drawing.Point(396, 12);
-            this.btnDeleteFromQeue.Name = "btnDeleteFromQeue";
-            this.btnDeleteFromQeue.Size = new System.Drawing.Size(206, 83);
-            this.btnDeleteFromQeue.TabIndex = 1;
-            this.btnDeleteFromQeue.Text = "Quitar de la lista";
-            this.btnDeleteFromQeue.UseVisualStyleBackColor = false;
-            this.btnDeleteFromQeue.Click += new System.EventHandler(this.btnDeleteFromQeue_Click);            
+            this.Reference.Frozen = true;
+            this.Reference.HeaderText = "Referencia";
+            this.Reference.Name = "Reference";
+            this.Reference.ReadOnly = true;
+            this.Reference.Width = 191;
             // 
             // PrintQeue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(987, 634);
+            this.ClientSize = new System.Drawing.Size(1181, 634);
             this.Controls.Add(this.btnDeleteFromQeue);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);
@@ -185,11 +195,12 @@
         private GroupBox groupBox1;
         private DataGridView dataGridView1;
         private Button btnDeleteFromQeue;
+        private System.Drawing.Printing.PrintDocument printMaravil;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Nombres;
         private DataGridViewTextBoxColumn Apellidos;
         private DataGridViewTextBoxColumn Telefonos;
         private DataGridViewTextBoxColumn Direccion;
-        private System.Drawing.Printing.PrintDocument printMaravil;
+        private DataGridViewTextBoxColumn Reference;
     }
 }

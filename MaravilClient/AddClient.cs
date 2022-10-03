@@ -53,6 +53,7 @@ namespace MaravilClient
             txtLastName.Clear();
             txtPhone.Clear();
             txtAddress.Clear();
+            txtReference.Clear();
             txtPhone2.Clear();
             cbState.SelectedIndex = 0;
             cbTown.SelectedIndex = 0;
@@ -72,6 +73,8 @@ namespace MaravilClient
                     message += "\n -Phone";
                 if (string.IsNullOrEmpty(txtAddress.Text.Trim()))
                     message += "\n -Direccion";
+                if (string.IsNullOrEmpty(txtReference.Text.Trim()))
+                    message += "\n -txtReferencia";
                 if (GetStateId() <= 0)
                     message += "\n -Departamento";
                 if (GetTownId() <= 0)
@@ -90,6 +93,7 @@ namespace MaravilClient
                     client.CellPhone = txtPhone.Text.Trim();
                     client.CellPhone2 = txtPhone2.Text.Trim();
                     client.Address = txtAddress.Text.Trim();
+                    client.Reference = txtReference.Text.Trim();
                     client.CreatedByUserId = loggedUser.Id;
                     client.ModifiedByUserId = loggedUser.Id;
                     client.TownId = GetTownId();
@@ -110,7 +114,8 @@ namespace MaravilClient
         private void txtAddress_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                SaveClient();
+                txtReference.Focus();
+
         }
 
         private void txtPhone2_KeyUp(object sender, KeyEventArgs e)
@@ -148,11 +153,11 @@ namespace MaravilClient
         private void AddClient_Load(object sender, EventArgs e)
         {
             towns = tonwActionsGlobal.GetTowns(String.Empty);
-            states = stateActionsGlobal.GetStates(String.Empty);           
-            cbState.DataSource =states;
+            states = stateActionsGlobal.GetStates(String.Empty);
+            cbState.DataSource = states;
             cbState.DisplayMember = "Name";
             cbState.ValueMember = "Id";
-           
+
         }
 
         private int GetTownId()
@@ -162,6 +167,12 @@ namespace MaravilClient
         private int GetStateId()
         {
             return ((dynamic)cbState.SelectedItem).Id;
+        }
+
+        private void txtReference_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                SaveClient();
         }
     }
 }

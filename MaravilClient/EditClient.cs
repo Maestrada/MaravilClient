@@ -113,6 +113,8 @@ namespace MaravilClient
                     message += "\n -Phone";
                 if (string.IsNullOrEmpty(txtAddress.Text.Trim()))
                     message += "\n -Direccion";
+               if (string.IsNullOrEmpty(txtReference.Text.Trim()))
+                    message += "\n -Referencia";
                 if (GetStateId() <= 0)
                     message += "\n -Departamento";
                 if (GetTownId() <= 0)
@@ -131,13 +133,14 @@ namespace MaravilClient
                     selectedClient.CellPhone = txtPhone.Text.Trim();
                     selectedClient.CellPhone2 = txtPhone2.Text.Trim();
                     selectedClient.Address = txtAddress.Text.Trim();
+                    selectedClient.Reference = txtReference.Text.Trim();
                     selectedClient.ModifiedByUserId = loggedUser.Id;
                     selectedClient.TownId = GetTownId();
 
                     label1.Focus();
 
                     if (clientActionsGlobal.UpdateClient(selectedClient))
-                        MessageBox.Show("Cliente agregado exitosamente. ", "Maravil - Editar cliente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); ;
+                        MessageBox.Show("Cliente actualizado exitosamente. ", "Maravil - Editar cliente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); ;
                 }
                 catch (Exception ex)
                 {
@@ -153,6 +156,7 @@ namespace MaravilClient
             txtPhone2.Text = selectedClient.CellPhone2;
             txtPhone.Text = selectedClient.CellPhone;
             txtAddress.Text = selectedClient.Address;
+            txtReference.Text = selectedClient.Reference;
             cbState.SelectedValue =  selectedClient.Town.StateId;     
             Thread.Sleep(200);
             cbTown.SelectedValue = selectedClient.TownId;            

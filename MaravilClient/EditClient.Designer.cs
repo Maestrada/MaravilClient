@@ -46,6 +46,8 @@
             this.cbState = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtReference = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -71,7 +73,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label5.ForeColor = System.Drawing.Color.MediumBlue;
-            this.label5.Location = new System.Drawing.Point(42, 477);
+            this.label5.Location = new System.Drawing.Point(40, 464);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 21);
@@ -135,7 +137,7 @@
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(124, 47);
-            this.btnCancel.TabIndex = 9;
+            this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -148,18 +150,18 @@
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(125, 47);
-            this.btnSave.TabIndex = 8;
+            this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Guardar";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(170, 477);
+            this.txtAddress.Location = new System.Drawing.Point(170, 461);
             this.txtAddress.Margin = new System.Windows.Forms.Padding(4);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(331, 167);
+            this.txtAddress.Size = new System.Drawing.Size(331, 110);
             this.txtAddress.TabIndex = 7;
             // 
             // txtPhone2
@@ -231,12 +233,35 @@
             this.label8.TabIndex = 26;
             this.label8.Text = "Departamento";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.label9.ForeColor = System.Drawing.Color.MediumBlue;
+            this.label9.Location = new System.Drawing.Point(46, 596);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(83, 21);
+            this.label9.TabIndex = 29;
+            this.label9.Text = "Referencia";
+            // 
+            // txtReference
+            // 
+            this.txtReference.Location = new System.Drawing.Point(170, 588);
+            this.txtReference.Margin = new System.Windows.Forms.Padding(4);
+            this.txtReference.Multiline = true;
+            this.txtReference.Name = "txtReference";
+            this.txtReference.Size = new System.Drawing.Size(331, 56);
+            this.txtReference.TabIndex = 8;
+            // 
             // EditClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(559, 727);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtReference);
             this.Controls.Add(this.cbTown);
             this.Controls.Add(this.cbState);
             this.Controls.Add(this.label7);
@@ -289,5 +314,7 @@
         private ComboBox cbState;
         private Label label7;
         private Label label8;
+        private Label label9;
+        private TextBox txtReference;
     }
 }

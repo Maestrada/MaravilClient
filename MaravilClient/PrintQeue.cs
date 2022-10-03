@@ -49,17 +49,20 @@ namespace MaravilClient
             {
                 //// the pdf content
                 PdfContentByte cb = writer.DirectContent;
-                iTextSharp.text.Font arial = FontFactory.GetFont("Arial", 12f);
+                iTextSharp.text.Font arial = FontFactory.GetFont("Arial", 11f);
                 arial.Color = BaseColor.Black;
                 Chunk nameText = new Chunk("\n\n\n\nNombre:  ");
-                nameText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.5f, null);
+                nameText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.2f, null);
                 Chunk clientName = new Chunk( client.Name + " " + client.LastName, arial);
                 Chunk phoneText = new Chunk("\n Telefono(s):  ");
-                phoneText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.5f, null);
+                phoneText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.2f, null);
                 Chunk phone = new Chunk( client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2) ? "" : " / " + client.CellPhone2), arial);
                 Chunk addressText = new Chunk("\nDireccion:  ");
-                addressText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.5f, null);
+                addressText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.2f, null);
                 Chunk adddres = new Chunk( client.Address, arial);
+                Chunk referenceText = new Chunk("\nReferencia:  ");
+                referenceText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.2f, null);
+                Chunk reference = new Chunk(client.Reference, arial);
                 Phrase phraseClientName = new Phrase();
                 phraseClientName.Add(nameText);
                 phraseClientName.Add(clientName);
@@ -67,6 +70,8 @@ namespace MaravilClient
                 phraseClientName.Add(phone);
                 phraseClientName.Add(addressText);
                 phraseClientName.Add(adddres);
+                phraseClientName.Add(referenceText);
+                phraseClientName.Add(reference);
                 Paragraph paragraphClientName = new Paragraph();
                 paragraphClientName.Add(phraseClientName);
                 document.Add(paragraphClientName);
@@ -109,6 +114,7 @@ namespace MaravilClient
                     LastName = item.Cells[2].Value as string,
                     CellPhone = item.Cells[3].Value as string,
                     Address = item.Cells[4].Value as string,
+                    Reference = item.Cells[5].Value as string,
                 });
             }
         }
@@ -119,7 +125,7 @@ namespace MaravilClient
             dataGridView1.Rows.Clear();
             foreach (Client client in listClient)
             {
-                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone, client.Address);
+                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone, client.Address,client.Reference);
             }
         }
 

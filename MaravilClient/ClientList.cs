@@ -132,7 +132,7 @@ namespace MaravilClient
             foreach (Client client in lista)
             {
                 bool selectedData = clientsToPrint.Any(x=>x.Id==client.Id) || checkAll;
-                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2.Trim()) ? "" : " / " + client.CellPhone2), client.Town.Name+", "+ client.Town.State.Name+", "+ client.Address, selectedData);
+                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2.Trim()) ? "" : " / " + client.CellPhone2), client.Town.Name+", "+ client.Town.State.Name+", "+ client.Address,client.Reference, selectedData);
             }
         }
         private void CleanTextBoxes()
@@ -159,6 +159,7 @@ namespace MaravilClient
                         LastName = item.LastName,
                         CellPhone = item.CellPhone,
                         Address = item.Address,
+                        Reference = item.Reference
                     });
             }
 
@@ -187,7 +188,7 @@ namespace MaravilClient
 
             foreach (DataGridViewRow item in dataGridView1.Rows)
             {
-                if ((bool)item.Cells[5].Value)
+                if ((bool)item.Cells[6].Value)
                 {
                     checkeds.Add(new Client
                     {
@@ -196,6 +197,7 @@ namespace MaravilClient
                         LastName = item.Cells[2].Value as string,
                         CellPhone = item.Cells[3].Value as string,
                         Address = item.Cells[4].Value as string,
+                        Reference = item.Cells[5].Value as string
                     });
                 }
             }
@@ -243,7 +245,7 @@ namespace MaravilClient
             dataGridView1.Rows.Clear();
             foreach (Client client in lista)
             {
-                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2.Trim()) ? "" : " / " + client.CellPhone2), client.Town.Name + ", " + client.Town.State.Name + ", " + client.Address,false);
+                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2.Trim()) ? "" : " / " + client.CellPhone2), client.Town.Name + ", " + client.Town.State.Name + ", " + client.Address,client.Reference,false);
             }
         }
 

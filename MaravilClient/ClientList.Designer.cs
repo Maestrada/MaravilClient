@@ -42,6 +42,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.salirDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btClean = new System.Windows.Forms.Button();
             this.lblDep = new System.Windows.Forms.Label();
             this.cbState = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -62,8 +63,8 @@
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Imprimir = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.btClean = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -81,7 +82,7 @@
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(1212, 31);
+            this.menuStrip1.Size = new System.Drawing.Size(1284, 31);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -199,10 +200,22 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(1211, 112);
+            this.groupBox1.Size = new System.Drawing.Size(1279, 112);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de busqueda";
+            // 
+            // btClean
+            // 
+            this.btClean.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btClean.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btClean.Location = new System.Drawing.Point(1174, 76);
+            this.btClean.Name = "btClean";
+            this.btClean.Size = new System.Drawing.Size(96, 30);
+            this.btClean.TabIndex = 6;
+            this.btClean.Text = "Limpiar";
+            this.btClean.UseVisualStyleBackColor = false;
+            this.btClean.Click += new System.EventHandler(this.btClean_Click);
             // 
             // lblDep
             // 
@@ -263,7 +276,7 @@
             this.btnSearch.BackColor = System.Drawing.Color.CornflowerBlue;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSearch.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSearch.Location = new System.Drawing.Point(1072, 18);
+            this.btnSearch.Location = new System.Drawing.Point(1174, 24);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(96, 50);
@@ -312,7 +325,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(1211, 588);
+            this.groupBox2.Size = new System.Drawing.Size(1279, 588);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Clientes";
@@ -321,7 +334,7 @@
             // 
             this.btnUnMarkAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUnMarkAll.ForeColor = System.Drawing.Color.Coral;
-            this.btnUnMarkAll.Location = new System.Drawing.Point(1053, 73);
+            this.btnUnMarkAll.Location = new System.Drawing.Point(1119, 73);
             this.btnUnMarkAll.Name = "btnUnMarkAll";
             this.btnUnMarkAll.Size = new System.Drawing.Size(151, 38);
             this.btnUnMarkAll.TabIndex = 4;
@@ -333,7 +346,7 @@
             // 
             this.btnCheckAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckAll.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.btnCheckAll.Location = new System.Drawing.Point(1053, 29);
+            this.btnCheckAll.Location = new System.Drawing.Point(1119, 29);
             this.btnCheckAll.Name = "btnCheckAll";
             this.btnCheckAll.Size = new System.Drawing.Size(151, 38);
             this.btnCheckAll.TabIndex = 3;
@@ -376,13 +389,14 @@
             this.Apellido,
             this.Telefono,
             this.Direccion,
+            this.Reference,
             this.Imprimir});
             this.dataGridView1.Location = new System.Drawing.Point(4, 114);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1203, 470);
+            this.dataGridView1.Size = new System.Drawing.Size(1266, 470);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CurrentCellDirtyStateChanged += new System.EventHandler(this.dataGridView1_CurrentCellDirtyStateChanged);
             // 
@@ -399,7 +413,7 @@
             this.Nombre.HeaderText = "Nombres";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 230;
+            this.Nombre.Width = 220;
             // 
             // Apellido
             // 
@@ -407,7 +421,7 @@
             this.Apellido.HeaderText = "Apellidos";
             this.Apellido.Name = "Apellido";
             this.Apellido.ReadOnly = true;
-            this.Apellido.Width = 230;
+            this.Apellido.Width = 220;
             // 
             // Telefono
             // 
@@ -415,7 +429,7 @@
             this.Telefono.HeaderText = "Telefonos";
             this.Telefono.Name = "Telefono";
             this.Telefono.ReadOnly = true;
-            this.Telefono.Width = 230;
+            this.Telefono.Width = 220;
             // 
             // Direccion
             // 
@@ -423,7 +437,15 @@
             this.Direccion.HeaderText = "Direccion";
             this.Direccion.Name = "Direccion";
             this.Direccion.ReadOnly = true;
-            this.Direccion.Width = 400;
+            this.Direccion.Width = 350;
+            // 
+            // Reference
+            // 
+            this.Reference.Frozen = true;
+            this.Reference.HeaderText = "Referencia";
+            this.Reference.Name = "Reference";
+            this.Reference.ReadOnly = true;
+            this.Reference.Width = 149;
             // 
             // Imprimir
             // 
@@ -434,24 +456,12 @@
             this.Imprimir.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Imprimir.Width = 70;
             // 
-            // btClean
-            // 
-            this.btClean.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.btClean.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btClean.Location = new System.Drawing.Point(1072, 70);
-            this.btClean.Name = "btClean";
-            this.btClean.Size = new System.Drawing.Size(96, 30);
-            this.btClean.TabIndex = 6;
-            this.btClean.Text = "Limpiar";
-            this.btClean.UseVisualStyleBackColor = false;
-            this.btClean.Click += new System.EventHandler(this.btClean_Click);
-            // 
             // ClientList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1212, 763);
+            this.ClientSize = new System.Drawing.Size(1284, 749);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
@@ -498,12 +508,6 @@
         private ToolStripMenuItem salirDelSistemaToolStripMenuItem;
         private GroupBox groupBox2;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn Nombre;
-        private DataGridViewTextBoxColumn Apellido;
-        private DataGridViewTextBoxColumn Telefono;
-        private DataGridViewTextBoxColumn Direccion;
-        private DataGridViewCheckBoxColumn Imprimir;
         private Button btnCheckAll;
         private Button btnShowPrintQeue;
         private Button btnAddPrintQeue;
@@ -513,5 +517,12 @@
         private Label lblDep;
         private ComboBox cbState;
         private Button btClean;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Apellido;
+        private DataGridViewTextBoxColumn Telefono;
+        private DataGridViewTextBoxColumn Direccion;
+        private DataGridViewTextBoxColumn Reference;
+        private DataGridViewCheckBoxColumn Imprimir;
     }
 }

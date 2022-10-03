@@ -21,6 +21,7 @@ namespace BAL.Models
         public int CreatedByUserId { get; set; }
         public int ModifiedByUserId { get; set; }
         public int TownId { get; set; }
+        public string Reference { get; set; }
         public virtual Town Town { get; set; }
         public virtual User CreatedByUser { get; set; } 
         public virtual User ModifiedByUser { get; set; }
