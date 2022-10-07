@@ -4,6 +4,7 @@ using DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(MaravilContext))]
-    partial class MaravilContextModelSnapshot : ModelSnapshot
+    [Migration("20221003202410_AddOrderTableAndReferenceToClient")]
+    partial class AddOrderTableAndReferenceToClient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,14 +89,8 @@ namespace DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -103,7 +99,7 @@ namespace DAL.Migrations
                     b.Property<bool>("IsDelivered")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -920,7 +916,7 @@ namespace DAL.Migrations
                         new
                         {
                             Id = 114,
-                            Name = "El Tuma - La Dalia",
+                            Name = "El Tuma -La Dalia",
                             StateId = 14
                         },
                         new
@@ -1196,9 +1192,9 @@ namespace DAL.Migrations
                         {
                             Id = 1,
                             ActiveStatus = true,
-                            CreatedOn = new DateTime(2022, 10, 7, 14, 39, 52, 626, DateTimeKind.Local).AddTicks(632),
+                            CreatedOn = new DateTime(2022, 10, 3, 14, 24, 9, 570, DateTimeKind.Local).AddTicks(2661),
                             IsSystemAdmin = true,
-                            ModifiedOn = new DateTime(2022, 10, 7, 14, 39, 52, 626, DateTimeKind.Local).AddTicks(641),
+                            ModifiedOn = new DateTime(2022, 10, 3, 14, 24, 9, 570, DateTimeKind.Local).AddTicks(2673),
                             Password = "bca6062db9ffe0bdb13f01b5dc48f6e0e7d0f8c8a21af0324c9971d3fbd51e08",
                             UserName = "admin"
                         });

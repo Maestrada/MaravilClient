@@ -25,5 +25,6 @@ namespace BAL.Models
         public virtual Town Town { get; set; }
         public virtual User CreatedByUser { get; set; } 
         public virtual User ModifiedByUser { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

@@ -60,7 +60,7 @@
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Coral;
             this.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnCancel.Location = new System.Drawing.Point(800, 12);
+            this.btnCancel.Location = new System.Drawing.Point(902, 12);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(375, 83);
             this.btnCancel.TabIndex = 2;
@@ -73,7 +73,7 @@
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(12, 101);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1166, 521);
+            this.groupBox1.Size = new System.Drawing.Size(1265, 521);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Clientes";
@@ -95,7 +95,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1160, 493);
+            this.dataGridView1.Size = new System.Drawing.Size(1259, 493);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView1_RowsRemoved);
             // 
@@ -103,7 +103,7 @@
             // 
             this.btnDeleteFromQeue.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnDeleteFromQeue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnDeleteFromQeue.Location = new System.Drawing.Point(396, 12);
+            this.btnDeleteFromQeue.Location = new System.Drawing.Point(443, 12);
             this.btnDeleteFromQeue.Name = "btnDeleteFromQeue";
             this.btnDeleteFromQeue.Size = new System.Drawing.Size(398, 83);
             this.btnDeleteFromQeue.TabIndex = 1;
@@ -114,10 +114,10 @@
             // Id
             // 
             this.Id.Frozen = true;
-            this.Id.HeaderText = "Id";
+            this.Id.HeaderText = "No Compra";
             this.Id.Name = "Id";
             this.Id.ReadOnly = true;
-            this.Id.Visible = false;
+            this.Id.Width = 90;
             // 
             // Nombres
             // 
@@ -131,11 +131,11 @@
             // Apellidos
             // 
             this.Apellidos.Frozen = true;
-            this.Apellidos.HeaderText = "Apellidos";
+            this.Apellidos.HeaderText = "Descripcion";
             this.Apellidos.Name = "Apellidos";
             this.Apellidos.ReadOnly = true;
             this.Apellidos.ToolTipText = "Quitar de la lista con la tecla DEL";
-            this.Apellidos.Width = 200;
+            this.Apellidos.Width = 210;
             // 
             // Telefonos
             // 
@@ -168,7 +168,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1181, 634);
+            this.ClientSize = new System.Drawing.Size(1283, 634);
             this.Controls.Add(this.btnDeleteFromQeue);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);

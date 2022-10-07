@@ -2,6 +2,7 @@
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using RawPrint.NetStd;
+using Services.OrderActions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,13 +23,15 @@ namespace MaravilClient
 {
     public partial class PrintQeue : Form
     {
-        public List<Client> listClient;
+        public List<Order> listOrders;
+        private readonly IOrderActions orderActionsGlobal;
         readonly string templatePath = "templatePDF//maraviltemplate.pdf";
         public string pathPDFCompleto = string.Empty;
-        public PrintQeue(List<Client> clients)
+        public PrintQeue(List<Order> orders, IOrderActions orderActions)
         {
             InitializeComponent();
-            listClient = clients;
+            orderActionsGlobal = orderActions;
+            listOrders =    orderActionsGlobal.GetOrdersByListIds( orders.Select(x=>x.Id).ToList());
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -45,24 +48,30 @@ namespace MaravilClient
             FileStream fs = new FileStream(newFile, FileMode.Create, FileAccess.Write);
             PdfWriter writer = PdfWriter.GetInstance(document, fs);
             document.Open();
-            foreach (Client client in listClient)
+            foreach (Order order in listOrders)
             {
                 //// the pdf content
                 PdfContentByte cb = writer.DirectContent;
-                iTextSharp.text.Font arial = FontFactory.GetFont("Arial", 11f);
+                iTextSharp.text.Font arial = FontFactory.GetFont("Arial", 10f);
                 arial.Color = BaseColor.Black;
-                Chunk nameText = new Chunk("\n\n\n\nNombre:  ");
-                nameText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.2f, null);
-                Chunk clientName = new Chunk( client.Name + " " + client.LastName, arial);
+                Chunk nameText = new Chunk("\n\n\nNombre:  ");
+                nameText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.1f, null);
+                Chunk clientName = new Chunk(order.Client.Name + " " + order.Client.LastName, arial);
                 Chunk phoneText = new Chunk("\n Telefono(s):  ");
-                phoneText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.2f, null);
-                Chunk phone = new Chunk( client.CellPhone + (string.IsNullOrEmpty(client.CellPhone2) ? "" : " / " + client.CellPhone2), arial);
+                phoneText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.1f, null);
+                Chunk phone = new Chunk(order.Client.CellPhone + (string.IsNullOrEmpty(order.Client.CellPhone2) ? "" : " / " + order.Client.CellPhone2), arial);
                 Chunk addressText = new Chunk("\nDireccion:  ");
-                addressText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.2f, null);
-                Chunk adddres = new Chunk( client.Address, arial);
+                addressText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.1f, null);
+                Chunk adddres = new Chunk(order.Client.Address, arial);
                 Chunk referenceText = new Chunk("\nReferencia:  ");
-                referenceText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.2f, null);
-                Chunk reference = new Chunk(client.Reference, arial);
+                referenceText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.1f, null);
+                Chunk reference = new Chunk(order.Client.Reference, arial);
+                Chunk orderDescText = new Chunk("\nDescripcion:  ");
+                orderDescText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.1f, null);
+                Chunk orderDesc= new Chunk(order.Description, arial);
+                Chunk orderIdText = new Chunk("\nNo de pedido:  "); 
+                orderIdText.SetTextRenderMode(PdfContentByte.TEXT_RENDER_MODE_FILL_STROKE, 0.1f, null);
+                Chunk orderId = new Chunk(order.Id.ToString(), arial);
                 Phrase phraseClientName = new Phrase();
                 phraseClientName.Add(nameText);
                 phraseClientName.Add(clientName);
@@ -72,6 +81,10 @@ namespace MaravilClient
                 phraseClientName.Add(adddres);
                 phraseClientName.Add(referenceText);
                 phraseClientName.Add(reference);
+                phraseClientName.Add(orderDescText);
+                phraseClientName.Add(orderDesc);
+                phraseClientName.Add(orderIdText);
+                phraseClientName.Add(orderId);
                 Paragraph paragraphClientName = new Paragraph();
                 paragraphClientName.Add(phraseClientName);
                 document.Add(paragraphClientName);
@@ -102,19 +115,20 @@ namespace MaravilClient
 
         private void dataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            listClient.Clear();
-
+            listOrders.Clear();
             foreach (DataGridViewRow item in dataGridView1.Rows)
             {
-
-                listClient.Add(new Client
+                listOrders.Add(new Order
                 {
-                    Id = (int)item.Cells[0].Value,
-                    Name = item.Cells[1].Value as string,
-                    LastName = item.Cells[2].Value as string,
-                    CellPhone = item.Cells[3].Value as string,
-                    Address = item.Cells[4].Value as string,
-                    Reference = item.Cells[5].Value as string,
+                    Id = (Int64)item.Cells[0].Value,
+                    Client = new Client
+                    {
+                        Name = item.Cells[1].Value as string,
+                        LastName = item.Cells[2].Value as string,
+                        CellPhone = item.Cells[3].Value as string,
+                        Address = item.Cells[4].Value as string,
+                        Reference = item.Cells[5].Value as string
+                    }
                 });
             }
         }
@@ -123,9 +137,9 @@ namespace MaravilClient
         {
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
-            foreach (Client client in listClient)
+            foreach (Order order in listOrders)
             {
-                dataGridView1.Rows.Add(client.Id, client.Name, client.LastName, client.CellPhone, client.Address,client.Reference);
+                dataGridView1.Rows.Add(order.Id, order.Client.Name +" "+ order.Client.LastName,order.Description, order.Client.CellPhone, order.Client.Address, order.Client.Reference);
             }
         }
 

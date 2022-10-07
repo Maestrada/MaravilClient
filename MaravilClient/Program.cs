@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.ClientActions;
+using Services.OrderActions;
 using Services.StatesActions;
 using Services.TownActions;
 using Services.UserActions;
@@ -46,6 +47,7 @@ namespace MaravilClient
                     services.AddTransient<IClientActions, ClientActions>();
                     services.AddTransient<IStateActions, StateActions>();
                     services.AddTransient<ITonwActions, TonwActions>();
+                    services.AddTransient<IOrderActions, OrderActions>();
                     services.AddTransient<Inicio>();
                 });
         }       

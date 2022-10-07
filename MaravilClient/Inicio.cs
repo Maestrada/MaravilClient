@@ -1,6 +1,7 @@
 
 using BAL.Models;
 using Services.ClientActions;
+using Services.OrderActions;
 using Services.StatesActions;
 using Services.TownActions;
 using Services.UserActions;
@@ -16,13 +17,16 @@ namespace MaravilClient
         private readonly IClientActions clientActionsGlobal ;
         private readonly IStateActions stateActionsGlobal ;
         private readonly ITonwActions tonwActionsGlobal ;
-        public Inicio(IUserActions userActions, IClientActions clientActions, IStateActions stateActions, ITonwActions tonwActions)
+        private readonly IOrderActions orderActionsGlobal ;
+
+        public Inicio(IUserActions userActions, IClientActions clientActions, IStateActions stateActions, ITonwActions tonwActions, IOrderActions orderActions)
         {
             InitializeComponent();
             this.userActionsGlobal = userActions;   
             this.clientActionsGlobal = clientActions;
             this.stateActionsGlobal = stateActions;
             this.tonwActionsGlobal = tonwActions;
+            this.orderActionsGlobal = orderActions;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -48,9 +52,9 @@ namespace MaravilClient
             if (logedUser != null)
             {
                 this.Hide();
-                ClientList frmCLients = new ClientList(logedUser,userActionsGlobal, clientActionsGlobal,stateActionsGlobal,tonwActionsGlobal);
-                frmCLients.FormClosed += (s, args) => this.Show();
-                frmCLients.Show();
+                OrderList frmOrders = new OrderList(logedUser,userActionsGlobal, clientActionsGlobal,stateActionsGlobal,tonwActionsGlobal,orderActionsGlobal);
+                frmOrders.FormClosed += (s, args) => this.Show();
+                frmOrders.Show();
             }
             else
             {

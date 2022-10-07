@@ -28,9 +28,12 @@ namespace DAL.DataContext
             modelBuilder.Entity<User>().ToTable("User").HasMany(x => x.ClientsCreators).WithOne();
             modelBuilder.Entity<User>().HasMany(x => x.ClientsModificators).WithOne();
 
+            modelBuilder.Entity<Order>().ToTable("Order").HasOne(x=>x.Client).WithOne();
+
             modelBuilder.Entity<Client>().ToTable("Client").HasOne(c => c.CreatedByUser).WithMany(x => x.ClientsCreators).HasForeignKey(x => x.CreatedByUserId).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Client>().HasOne(c => c.ModifiedByUser).WithMany(x => x.ClientsModificators).HasForeignKey(x => x.ModifiedByUserId).OnDelete(DeleteBehavior.ClientCascade);
             modelBuilder.Entity<Client>().HasOne(c => c.Town).WithMany(x => x.Clients).HasForeignKey(x => x.TownId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Client>().HasMany(c => c.Orders).WithOne(x => x.Client).HasForeignKey(x => x.ClientId).OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<User>().HasData(new { Id = 1, UserName = "admin", Password = "bca6062db9ffe0bdb13f01b5dc48f6e0e7d0f8c8a21af0324c9971d3fbd51e08", CreatedOn = DateTime.Now, ModifiedOn = DateTime.Now, IsSystemAdmin = true, ActiveStatus = true });
 
@@ -165,7 +168,7 @@ namespace DAL.DataContext
             modelBuilder.Entity<Town>().HasData(new { Id = 111, Name = "San Juan de Oriente", StateId = 13 });
             modelBuilder.Entity<Town>().HasData(new { Id = 112, Name = "Tisma", StateId = 13 });
             modelBuilder.Entity<Town>().HasData(new { Id = 113, Name = "Ciudad Darío", StateId = 14 });
-            modelBuilder.Entity<Town>().HasData(new { Id = 114, Name = "El Tuma -La Dalia", StateId = 14 });
+            modelBuilder.Entity<Town>().HasData(new { Id = 114, Name = "El Tuma - La Dalia", StateId = 14 });
             modelBuilder.Entity<Town>().HasData(new { Id = 115, Name = "Esquipulas", StateId = 14 });
             modelBuilder.Entity<Town>().HasData(new { Id = 116, Name = "Matagalpa", StateId = 14 });
             modelBuilder.Entity<Town>().HasData(new { Id = 117, Name = "Matiguás", StateId = 14 });
@@ -211,6 +214,7 @@ namespace DAL.DataContext
         public DbSet<User> Users { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Town> Towns { get; set; }
+        public DbSet<Order> Orders { get; set; }
         public DbSet<Client> Clients { get; set; }
 
     }

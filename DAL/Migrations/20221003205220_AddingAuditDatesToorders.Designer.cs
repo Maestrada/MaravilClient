@@ -4,6 +4,7 @@ using DAL.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(MaravilContext))]
-    partial class MaravilContextModelSnapshot : ModelSnapshot
+    [Migration("20221003205220_AddingAuditDatesToorders")]
+    partial class AddingAuditDatesToorders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,9 +88,6 @@ namespace DAL.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
@@ -1196,9 +1195,9 @@ namespace DAL.Migrations
                         {
                             Id = 1,
                             ActiveStatus = true,
-                            CreatedOn = new DateTime(2022, 10, 7, 14, 39, 52, 626, DateTimeKind.Local).AddTicks(632),
+                            CreatedOn = new DateTime(2022, 10, 3, 14, 52, 19, 671, DateTimeKind.Local).AddTicks(8696),
                             IsSystemAdmin = true,
-                            ModifiedOn = new DateTime(2022, 10, 7, 14, 39, 52, 626, DateTimeKind.Local).AddTicks(641),
+                            ModifiedOn = new DateTime(2022, 10, 3, 14, 52, 19, 671, DateTimeKind.Local).AddTicks(8708),
                             Password = "bca6062db9ffe0bdb13f01b5dc48f6e0e7d0f8c8a21af0324c9971d3fbd51e08",
                             UserName = "admin"
                         });

@@ -55,8 +55,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnUnMarkAll = new System.Windows.Forms.Button();
             this.btnCheckAll = new System.Windows.Forms.Button();
-            this.btnShowPrintQeue = new System.Windows.Forms.Button();
-            this.btnAddPrintQeue = new System.Windows.Forms.Button();
+            this.btnDeleteItems = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -317,8 +316,7 @@
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.btnUnMarkAll);
             this.groupBox2.Controls.Add(this.btnCheckAll);
-            this.groupBox2.Controls.Add(this.btnShowPrintQeue);
-            this.groupBox2.Controls.Add(this.btnAddPrintQeue);
+            this.groupBox2.Controls.Add(this.btnDeleteItems);
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Highlight;
             this.groupBox2.Location = new System.Drawing.Point(0, 175);
@@ -354,29 +352,17 @@
             this.btnCheckAll.UseVisualStyleBackColor = true;
             this.btnCheckAll.Click += new System.EventHandler(this.btnCheckAll_Click);
             // 
-            // btnShowPrintQeue
+            // btnDeleteItems
             // 
-            this.btnShowPrintQeue.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.btnShowPrintQeue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnShowPrintQeue.Location = new System.Drawing.Point(280, 29);
-            this.btnShowPrintQeue.Name = "btnShowPrintQeue";
-            this.btnShowPrintQeue.Size = new System.Drawing.Size(175, 78);
-            this.btnShowPrintQeue.TabIndex = 2;
-            this.btnShowPrintQeue.Text = "Ver cola de impresion";
-            this.btnShowPrintQeue.UseVisualStyleBackColor = false;
-            this.btnShowPrintQeue.Click += new System.EventHandler(this.btnShowPrintQeue_Click);
-            // 
-            // btnAddPrintQeue
-            // 
-            this.btnAddPrintQeue.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.btnAddPrintQeue.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAddPrintQeue.Location = new System.Drawing.Point(91, 29);
-            this.btnAddPrintQeue.Name = "btnAddPrintQeue";
-            this.btnAddPrintQeue.Size = new System.Drawing.Size(165, 78);
-            this.btnAddPrintQeue.TabIndex = 1;
-            this.btnAddPrintQeue.Text = "Agregar marcados a cola de impresion";
-            this.btnAddPrintQeue.UseVisualStyleBackColor = false;
-            this.btnAddPrintQeue.Click += new System.EventHandler(this.btnAddPrintQeue_Click);
+            this.btnDeleteItems.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnDeleteItems.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnDeleteItems.Location = new System.Drawing.Point(36, 29);
+            this.btnDeleteItems.Name = "btnDeleteItems";
+            this.btnDeleteItems.Size = new System.Drawing.Size(165, 78);
+            this.btnDeleteItems.TabIndex = 1;
+            this.btnDeleteItems.Text = "Borrar seleccionados";
+            this.btnDeleteItems.UseVisualStyleBackColor = false;
+            this.btnDeleteItems.Click += new System.EventHandler(this.borrarClienteToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
@@ -450,7 +436,7 @@
             // Imprimir
             // 
             this.Imprimir.Frozen = true;
-            this.Imprimir.HeaderText = "Imp";
+            this.Imprimir.HeaderText = "Marcar";
             this.Imprimir.Name = "Imprimir";
             this.Imprimir.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Imprimir.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -509,8 +495,7 @@
         private GroupBox groupBox2;
         private DataGridView dataGridView1;
         private Button btnCheckAll;
-        private Button btnShowPrintQeue;
-        private Button btnAddPrintQeue;
+        private Button btnDeleteItems;
         private ToolStripMenuItem editarClienteToolStripMenuItem;
         private Button button1;
         private Button btnUnMarkAll;
