@@ -100,6 +100,13 @@ namespace Services.OrderActions
             return orders;
         }
 
+        public void MarkOrdersAsDelivered(List<Order> orders)
+        {
+            orders.ForEach(x => x.IsDelivered = true);
+            orderContext.Orders.UpdateRange(orders);
+            orderContext.SaveChanges();
+        }
+
         public bool UpdateOrder(Order order)
         {
             bool result = false;

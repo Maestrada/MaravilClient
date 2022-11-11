@@ -103,6 +103,9 @@ namespace MaravilClient
             // Priting the file
             printer.PrintRawFile("Microsoft Print to PDF", newFile);
 
+            //mar all as delivered
+            MarkAsDeliver();
+
             //deleting the file after 5 seconds
             Thread.Sleep(5000);
             File.Delete(newFile);
@@ -111,6 +114,11 @@ namespace MaravilClient
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void MarkAsDeliver()
+        {
+            orderActionsGlobal.MarkOrdersAsDelivered(listOrders);
         }
 
         private void dataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)

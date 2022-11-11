@@ -15,6 +15,7 @@ namespace Services.OrderActions
         public List<Order> GetOrdersByListIds(List<Int64> orderIds);     
         public Order GetOrderById(Int64 id);
         public List<Order> GetOrdersByIds(List<Int64> ids);
-        public List<Order> ListOrder(Int64 clientId = 0, int orderState=0);
+        public List<Order> ListOrder(Int64 clientId = 0, int orderState = 0);
+        public void MarkOrdersAsDelivered(List<Order>orders);
     }
 }
